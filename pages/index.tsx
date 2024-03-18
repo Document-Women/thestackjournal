@@ -49,7 +49,6 @@ export default function Index({ allPosts: { edges }, preview }) {
         )}
         {edges.length > 0 && (
           <>
-            <h1 className="text-8xl font-display">Featured</h1>
             <MoreStories heading={"Featured"} posts={featuredPosts} limit="3" />
 
             <SectionSeparator />
