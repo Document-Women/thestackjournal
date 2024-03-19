@@ -3,7 +3,7 @@ import Date from "./date";
 import CoverImage from "./cover-image";
 import Link from "next/link";
 import Category, { styleEnums } from "./category";
-import { getColor } from "../lib/colors";
+import { getColor } from "../lib/category-params";
 
 export default function PostCard({
   title,
@@ -32,14 +32,13 @@ export default function PostCard({
             <Category
               category={category}
               style={styleEnums.solid}
-              oolor={getColor(category.name)}
               size={size}
             />
           </div>
 
           <h3
-            className={`leading-snug ${
-              size ? "mb-2" : "h-[125px] text-3xl mb-3"
+            className={`leading-tight ${
+              size ? "mb-2" : "h-[125px] text-[1.65rem] mb-3"
             }`}
           >
             <Link

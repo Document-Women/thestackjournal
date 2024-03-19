@@ -166,10 +166,6 @@ export async function getAllPostsByCategory(category) {
                   id
                 }
               }
-              nodes {
-                name
-                slug
-              }
             }
             slug
             title

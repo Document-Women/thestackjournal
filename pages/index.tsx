@@ -17,16 +17,16 @@ import NewsletterBox from "../components/newsletter-box";
 
 export default function Index({ allPosts: { edges }, preview }) {
   // TODO - get all cover stories and sort by date, render the most recent
-  const heroPost = getPostsByCategory(edges, "Cover Story")[0].node;
-
-  // const morePosts = edges.slice(1);
-
+  const heroPost = getPostsByCategory(edges, "Cover Story")[0].node; //edges.slice(1);
   const dearTechSis = getPostsByCategory(edges, "Dear Tech Sis"); // TODO - use category slug
   const featuredPosts = getPostsByCategory(edges, "Featured");
   const startupPosts = getPostsByCategory(edges, "Startups");
   const foundersPosts = getPostsByCategory(edges, "Founders");
   const eventPosts = getPostsByCategory(edges, "Events");
-  // console.log({ startupPosts });
+
+  console.log(
+    edges.filter((i) => i.node.categories.edges[0].node.name === "Featured")
+  );
 
   return (
     <Layout preview={preview}>
@@ -44,11 +44,12 @@ export default function Index({ allPosts: { edges }, preview }) {
             author={heroPost.author}
             slug={heroPost.slug}
             excerpt={heroPost.excerpt}
-            category={"event"}
+            category={heroPost.categories.edges[0].node}
           />
         )}
         {edges.length > 0 && (
           <>
+            <div className="mt-16"></div>
             <MoreStories heading={"Featured"} posts={featuredPosts} limit="3" />
 
             <SectionSeparator />
@@ -70,9 +71,10 @@ export default function Index({ allPosts: { edges }, preview }) {
             />
 
             {/* ad space */}
+
             <Image
               src="https://res.cloudinary.com/do3qitis2/image/upload/q_auto/f_auto/www.shopwithme.com_de3lfj"
-              alt="ad"
+              alt="advert"
               width={800}
               height={360}
               className="w-full my-28"

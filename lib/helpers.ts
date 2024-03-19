@@ -5,3 +5,7 @@ export const getPostsByCategory = (posts, category) => {
 }
 
 export const randy = (array: any[]) => array[Math.round(Math.random() * array.length)]
+
+export const sluggify = (i) => i.split(" ").join("-")
+
+export const unslug = (i) => i.split("-").join(" ")

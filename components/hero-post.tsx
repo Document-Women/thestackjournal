@@ -3,7 +3,7 @@ import Date from "./date";
 import CoverImage from "./cover-image";
 import Link from "next/link";
 import Category, { styleEnums } from "./category";
-import { getColor } from "../lib/colors";
+import { getColor } from "../lib/category-params";
 
 export default function HeroPost({
   title,
@@ -23,11 +23,7 @@ export default function HeroPost({
       </div>
       <div className="w-4/5 relative bg-white shadow-xl rounded-[30px] mx-auto -mt-48 p-8 z-10">
         <div className="mb-4">
-          <Category
-            category={category}
-            style={styleEnums.solid}
-            oolor={getColor(category)}
-          />
+          <Category category={category} style={styleEnums.outline} />
         </div>
 
         <h3 className="mb-4 text-2xl lg:text-6xl leading-tight">

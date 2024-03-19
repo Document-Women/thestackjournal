@@ -3,7 +3,6 @@ import Date from "./date";
 import CoverImage from "./cover-image";
 import Link from "next/link";
 import Category, { styleEnums } from "./category";
-import { getColor } from "../lib/colors";
 import { randy } from "../lib/helpers";
 
 export default function EventCard({
@@ -39,15 +38,13 @@ export default function EventCard({
           <div className="flex gap-2 mb-4">
             <Category
               category={category}
-              style={styleEnums.solid}
-              oolor={getColor(category?.name)}
+              style={styleEnums.outline}
               size={size}
             />
 
             <Category
               category={category}
               style={styleEnums.solid}
-              oolor={getColor(category?.name)}
               size={size}
             />
           </div>

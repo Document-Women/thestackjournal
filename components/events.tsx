@@ -29,11 +29,7 @@ export default function Events({ posts, limit }) {
                   author={node.author}
                   slug={node.slug}
                   excerpt={node.excerpt}
-                  category={
-                    node.categories?.edges
-                      ? node.categories?.edges[0]?.node.name
-                      : node.categories?.nodes[0]?.name
-                  }
+                  category={node.categories?.edges[0]?.node}
                 />
               );
             }

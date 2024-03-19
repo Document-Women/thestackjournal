@@ -22,6 +22,9 @@ import { CMS_NAME } from "../../lib/constants";
 import Navigation from "../../components/navigation";
 import Footer from "../../components/footer";
 import NewsletterBox from "../../components/newsletter-box";
+import Image from "next/image";
+import { getCategoryDesc } from "../../lib/category-params";
+import { sluggify, unslug } from "../../lib/helpers";
 
 export default function Post({ posts, category }) {
   return (
@@ -34,16 +37,30 @@ export default function Post({ posts, category }) {
         <Navigation />
         {posts.length > 0 && (
           <>
-            {/* <MoreStories heading={"Featured"} posts={featuredPosts} limit="3" /> */}
+            <div className="flex justify-between">
+              <div className="w-1/2 mt-12">
+                <h2 className="text-5xl mb-4 capitalize font-semibold">
+                  {category}
+                </h2>
+                <p className="text-xl leading-normal">
+                  {getCategoryDesc(category)}
+                </p>
+              </div>
 
-            <SectionSeparator />
+              <Image
+                className=""
+                src={`/images/${sluggify(category)}.png`}
+                alt={""}
+                width={400}
+                height={300}
+              />
+            </div>
 
-            <ThreeColStories
-              posts={posts}
-              heading={category}
-              limit="3"
-              layout="layoutTwo"
-            />
+            {/* <SectionSeparator /> */}
+
+            <div className="my-20"></div>
+
+            <ThreeColStories posts={posts} limit="3" layout="layoutTwo" />
 
             <SectionSeparator />
 
@@ -59,10 +76,9 @@ export default function Post({ posts, category }) {
 
 export const getStaticProps = async ({ params }) => {
   const { edges } = await getAllPostsByCategory(params?.slug);
-  console.log("edges:", edges.length);
 
   return {
-    props: { posts: edges, category: params.slug },
+    props: { posts: edges, category: unslug(params.slug) },
     revalidate: 10,
   };
 };
@@ -70,7 +86,7 @@ export const getStaticProps = async ({ params }) => {
 export const getStaticPaths = async () => {
   const { categories } = await getAllCategories();
   const paths = categories.edges.map(({ node }) => ({
-    params: { slug: node.slug, foo: "bar" },
+    params: { slug: node.slug, foo: "bar" }, // no other props allowed. i need to raise an issue on github
   }));
 
   return {

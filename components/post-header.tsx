@@ -4,7 +4,7 @@ import CoverImage from "./cover-image";
 import PostTitle from "./post-title";
 import Category from "./category";
 import Author from "./author";
-import { getColor } from "../lib/colors";
+import { getColor } from "../lib/category-params";
 
 export default function PostHeader({
   title,
@@ -31,7 +31,7 @@ export default function PostHeader({
         {/* <PostTitle>{title}</PostTitle> */}
         <div className="w-3/5 max-h-[600px] mx-auto py-48 text-white text-center">
           <div className="my-4">
-            <Category category={category} oolor={getColor(category.name)} />
+            <Category category={category} />
           </div>
 
           <h1 className="text-lg lg:text-6xl font-semibold leading-snug">

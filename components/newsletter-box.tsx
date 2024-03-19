@@ -3,7 +3,7 @@ import Date from "./date";
 import CoverImage from "./cover-image";
 import Link from "next/link";
 import Category from "./category";
-import { getColor } from "../lib/colors";
+import { getColor } from "../lib/category-params";
 import { randy } from "../lib/helpers";
 
 export default function NewsletterBox() {
@@ -30,9 +30,9 @@ export default function NewsletterBox() {
           <input
             type="text"
             placeholder="Enter your email address here"
-            className="bg-transparent text-center border rounded-full py-4"
+            className="bg-transparent text-center border rounded-full py-4 enabled:hover:border-gray-400"
           />
-          <button className="w-48 mx-auto text-center bg-purple-800 rounded-full my-4 py-4">
+          <button className="w-48 mx-auto text-center bg-purple-800 hover:bg-purple-500 rounded-full my-4 py-4">
             Subscribe
           </button>
         </form>

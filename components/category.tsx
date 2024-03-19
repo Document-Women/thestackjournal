@@ -1,9 +1,9 @@
 import Link from "next/link";
+import { getColor } from "../lib/category-params";
 
 interface ICategory {
-  category: any;
+  category: { name: string; slug: string };
   style?: styleEnums;
-  oolor: string;
   size?: string;
 }
 
@@ -16,18 +16,23 @@ export enum styleEnums {
 export default function Categories({
   category,
   style = styleEnums.plain, // solid, outline or plain - default plain // consider enums - DONE!
-  oolor,
   size = "", // for big or small card - default big
 }: ICategory) {
-  const solid = `bg-${oolor} text-white`;
-  const outline = `border border-${oolor} text-${oolor}`;
+  // const solid = `bg-${oolor} text-white`;
+  // const outline = `border border-${oolor} text-${oolor}`;
+
+  const colour = getColor(category.name);
+
+  const solid = { backgroundColor: colour, color: "#FFF" };
+  const outline = { outline: `solid 1px ${colour}`, color: colour };
 
   return style ? (
     <Link href={`/category/${category.slug}`}>
       <span
+        style={style === styleEnums.solid ? solid : outline}
         className={`capitalize rounded-full ${
-          style === styleEnums.solid ? solid : outline
-        }  ${size ? "text-xs px-2 py-1" : "text-sm px-6 py-3"}`}
+          size ? "text-xs px-2 py-1" : "text-sm px-6 py-3"
+        }`}
       >
         {" "}
         {category.name}{" "}
