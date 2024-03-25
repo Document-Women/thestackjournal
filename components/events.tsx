@@ -16,10 +16,10 @@ export default function Events({ posts, limit }) {
           We help you binge tech events to watch, and also let you in on
           upcoming events to look out for
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 md:gap-x-4 lg:gap-x-8 gap-y-20 md:gap-y-32 mb-32">
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-x-8 gap-y-4 mb-">
           {posts.map(({ node }: any, index: number) => {
             if (index < limit) {
-              // console.log({ posts });
               return (
                 <EventCard
                   key={node.slug}

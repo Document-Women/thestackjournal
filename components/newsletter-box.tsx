@@ -9,13 +9,13 @@ import { randy } from "../lib/helpers";
 export default function NewsletterBox() {
   return (
     <div
-      className="flex flex-col text-white bg-center bg-no-repeat bg-cover py-24"
+      className="flex flex-col text-white bg-center bg-no-repeat bg-cover p-4 lg:py-24"
       style={{
         backgroundImage:
           "url(https://res.cloudinary.com/do3qitis2/image/upload/q_auto/f_auto/letter-box_kq0gbh)",
       }}
     >
-      <div className="w-1/2 mx-auto text-center px-4 my-8">
+      <div className="lg:w-1/2 mx-auto text-center my-8">
         <h3 className="leading-snug text-2xl mb-2">
           Be the first to hear about it
         </h3>
@@ -25,7 +25,7 @@ export default function NewsletterBox() {
         </p>
       </div>
 
-      <div className="w-1/2 mx-auto">
+      <div className="lg:w-1/2 lg:mx-auto">
         <form action="" className="flex flex-col">
           <input
             type="text"

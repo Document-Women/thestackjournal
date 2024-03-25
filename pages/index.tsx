@@ -18,15 +18,11 @@ import NewsletterBox from "../components/newsletter-box";
 export default function Index({ allPosts: { edges }, preview }) {
   // TODO - get all cover stories and sort by date, render the most recent
   const heroPost = getPostsByCategory(edges, "Cover Story")[0].node; //edges.slice(1);
-  const dearTechSis = getPostsByCategory(edges, "Dear Tech Sis"); // TODO - use category slug
-  const featuredPosts = getPostsByCategory(edges, "Featured");
-  const startupPosts = getPostsByCategory(edges, "Startups");
-  const foundersPosts = getPostsByCategory(edges, "Founders");
-  const eventPosts = getPostsByCategory(edges, "Events");
-
-  console.log(
-    edges.filter((i) => i.node.categories.edges[0].node.name === "Featured")
-  );
+  const dearTechSis = getPostsByCategory(edges, "Dear Tech Sis", 10); // TODO - use category slug
+  const featuredPosts = getPostsByCategory(edges, "Featured", 10);
+  const startupPosts = getPostsByCategory(edges, "Startups", 10);
+  const foundersPosts = getPostsByCategory(edges, "Founders", 10);
+  const eventPosts = getPostsByCategory(edges, "Events", 10);
 
   return (
     <Layout preview={preview}>
@@ -70,14 +66,14 @@ export default function Index({ allPosts: { edges }, preview }) {
               layout="layoutFour"
             />
 
-            {/* ad space */}
+            {/* <h3>Ad Space</h3> */}
 
             <Image
               src="https://res.cloudinary.com/do3qitis2/image/upload/q_auto/f_auto/www.shopwithme.com_de3lfj"
               alt="advert"
               width={800}
               height={360}
-              className="w-full my-28"
+              className="w-full my-12 lg:my-28"
             />
 
             <ThreeColStories
@@ -90,6 +86,8 @@ export default function Index({ allPosts: { edges }, preview }) {
             <SectionSeparator />
 
             <Events posts={eventPosts} limit="3" />
+
+            <SectionSeparator />
 
             <NewsletterBox />
           </>

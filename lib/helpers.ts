@@ -1,7 +1,8 @@
-export const getPostsByCategory = (posts, category) => {
-    return posts.filter((edge) =>
+export const getPostsByCategory = (posts, category, limit = posts.length) => {
+    const filteredPosts = posts.filter((edge) =>
         edge.node.categories.edges.some(({node}) => node.name === category)
     )
+    return filteredPosts.slice(0, limit)
 }
 
 export const randy = (array: any[]) => array[Math.round(Math.random() * array.length)]

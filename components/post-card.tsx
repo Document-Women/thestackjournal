@@ -18,14 +18,14 @@ export default function PostCard({
   return (
     <Link href={`/posts/${slug}`}>
       <div
-        className="flex text-white rounded-[30px] bg-center bg-no-repeat bg-cover mb-2"
+        className="flex text-white rounded-[16px] lg:rounded-[30px] bg-top bg-no-repeat bg-cover mb-2"
         style={{
           backgroundImage: `url(${coverImage?.node.sourceUrl})`,
         }}
       >
         <div
-          className={`w-full rounded-b-[30px] bg-gradient-to-t from-black ${
-            size ? "mt-12 p-4" : "mt-64 p-8"
+          className={`w-full rounded-b-[16px] lg:rounded-b-[30px] bg-gradient-to-t from-black ${
+            size ? "mt-12 p-4" : "mt-16 lg:mt-48 p-8"
           }`}
         >
           <div className="mb-4">
@@ -38,7 +38,9 @@ export default function PostCard({
 
           <h3
             className={`leading-tight ${
-              size ? "mb-2" : "h-[125px] text-[1.65rem] mb-3"
+              size
+                ? "mb-8"
+                : "h-[5rem] lg:h-[9rem] my-4 lg:my-8 text-xl lg:text-4xl"
             }`}
           >
             <Link

@@ -9,7 +9,7 @@ export default function Footer() {
     <footer className="bg-amber-100 border-t border-accent-2 mt-16 py-20">
       <Container>
         <div className="flex flex-col lg:flex-row items-start">
-          <div className="lg:w-1/3">
+          <div className="lg:w-1/3 mb-8">
             <Link href="/" className="logo inline-block align-middle">
               <Image
                 src="/images/the-stack-journal-logo.png"
@@ -19,7 +19,7 @@ export default function Footer() {
               />
             </Link>
 
-            <div className="social-icons flex lg:gap-8 mt-8">
+            <div className="social-icons flex gap-4 lg:gap-8 mt-8">
               <Link href="#" className="">
                 <SocialTw color={"#532D97"} className="hover:opacity-75" />
               </Link>
@@ -38,9 +38,9 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="lg:w-1/3 flex gap-20">
-            <ul className="">
-              <li className="font-bold mb-4">Company</li>
+          <div className="lg:w-1/3 md:flex gap-20">
+            <ul className="mb-8">
+              <li className="text-lg font-bold mb-4">Company</li>
               <li className="mb-4">
                 <a href="#" className="hover:text-purple-800">
                   About Us
@@ -71,8 +71,8 @@ export default function Footer() {
               </li>
             </ul>
 
-            <ul className="">
-              <li className="font-bold mb-4">Categories</li>
+            <ul className="mb-8">
+              <li className="text-lg font-bold mb-4">Categories</li>
               <li className="mb-4">
                 <a
                   href="/category/artificial-intelligence"
@@ -106,8 +106,8 @@ export default function Footer() {
               </li>
             </ul>
 
-            <ul className="">
-              <li className="font-bold mb-4">Legal</li>
+            <ul className="mb-8">
+              <li className="text-lg font-bold mb-4">Legal</li>
               <li className="mb-4">
                 <a href="/privacy" className="hover:text-purple-800">
                   Privacy
@@ -124,12 +124,10 @@ export default function Footer() {
           <div className="ml-auto">
             <form
               action=""
-              className="flex__ flex-col item-end w-[350px] h-[300px] text-right"
+              className="flex__ flex-col item-end__ lg:w-[350px] lg:h-[300px] lg:text-right"
             >
-              <h4 className="text-2xl mb-4 lg:text-right">
-                We are building a oommunity
-              </h4>
-              <p className="lg:text-right">
+              <h4 className="text-2xl mb-4">We are building a community</h4>
+              <p className="">
                 Join our waiting list to be part of the first ones to know when
                 we launch
               </p>

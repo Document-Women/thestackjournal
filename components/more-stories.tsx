@@ -9,12 +9,11 @@ export default function MoreStories({ heading = "", posts, limit }) {
     <div>
       <section>
         {heading && (
-          <h2 className="my-8 text-4xl md:text-6xl font-bold">{heading}</h2>
+          <h2 className="my-8 text-3xl lg:text-6xl font-bold">{heading}</h2>
         )}
-        <div className="grid grid-cols-1 md:grid-cols-3 md:gap-x-4 lg:gap-x-8 gap-y-20 md:gap-y-32 mb-32">
+        <div className="grid grid-cols-1 lg:grid-cols-3 lg:gap-x-8 gap-y-4">
           {posts.map(({ node }: any, index: number) => {
             if (index < limit) {
-              // console.log({ posts });
               return (
                 <PostCard
                   key={node.slug}

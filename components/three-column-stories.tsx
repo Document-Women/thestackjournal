@@ -9,13 +9,11 @@ export default function Stories({ posts, heading = "", limit, layout }) {
   return (
     <section>
       {heading && (
-        <h2 className="my-8 text-4xl md:text-6xl font-bold capitalize">
-          {heading}
-        </h2>
+        <h2 className="my-8 text-3xl lg:text-6xl font-bold">{heading}</h2>
       )}
-      <div className="flex gap-12">
+      <div className="lg:flex gap-12">
         <div
-          className="inline-block w-1/2"
+          className="inline-block w-full lg:w-1/2"
           style={{ order: getLayout(layout, "single") }}
         >
           {posts.map(({ node }: any, index: number) => {
@@ -37,7 +35,7 @@ export default function Stories({ posts, heading = "", limit, layout }) {
         </div>
 
         <div
-          className="inline-block w-1/4"
+          className="inline-block lg:w-1/4"
           style={{ order: getLayout(layout, "multiple") }}
         >
           {posts.map(({ node }: any, index: number) => {
@@ -61,7 +59,7 @@ export default function Stories({ posts, heading = "", limit, layout }) {
         </div>
 
         <div
-          className="inline-block w-1/4"
+          className="inline-block lg:w-1/4"
           style={{ order: getLayout(layout, "plain") }}
         >
           {posts.map(({ node }, index) => {
