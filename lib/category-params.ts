@@ -35,6 +35,10 @@ export const categoryParams = {
         color: "rgb(245 158 11)",
         description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod voluptatibus vel itaque ab deleniti harum iste deserunt pariatur modi. Veritatis eaque officia ea illum necessitatibus eveniet labore doloremque, quaerat ut aperiam rerum deleniti recusandae tempore quia eius facere. Quibusdam a repude.",
     },
+    "industry report": {
+        color: "rgb(239 68 68)",
+        description: "Lorem ipsum dolor sit"
+    },
     "uncategorized": {
         color: "rgb(239 68 68)"
     },
