@@ -29,7 +29,7 @@ export default function PostHeader({
         </div> */}
 
         {/* <PostTitle>{title}</PostTitle> */}
-        <div className="w-3/5 max-h-[600px] mx-auto py-48 text-white text-center">
+        <div className="lg:w-3/5 lg:max-h-[600px] mx-auto p-12 lg:px-0 lg:py-48 text-white text-center">
           <div className="my-4">
             <Category category={category} />
           </div>
@@ -40,7 +40,7 @@ export default function PostHeader({
           {/* <div className="hidden md:block md:mb-12">
             <Avatar author={author} />
           </div> */}
-          <div className="my-4 text-lg">
+          <div className="my-4 text-sm lg:text-lg">
             <Author author={author} />
             <span className="mx-2"> | </span>
             <Date dateString={date} />

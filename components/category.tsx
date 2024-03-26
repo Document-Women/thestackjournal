@@ -26,21 +26,20 @@ export default function Categories({
   const solid = { backgroundColor: colour, color: "#FFF" };
   const outline = { outline: `solid 1px ${colour}`, color: colour };
 
-  return style ? (
+  return (
     <Link href={`/category/${category.slug}`}>
       <span
         style={style === styleEnums.solid ? solid : outline}
         className={`capitalize rounded-full ${
-          size ? "text-xs px-2 py-1" : "text-sm px-6 py-3"
+          size ? "text-xs px-2 py-1" : "px-6 py-3"
         }`}
       >
         {" "}
         {category.name}{" "}
       </span>
     </Link>
-  ) : (
-    <Link href={`/category/${category.slug}`}>
-      <span className={`capitalize text-gray-800`}> {category.name} </span>
-    </Link>
   );
+  // <Link href={`/category/${category.slug}`}>
+  //   <span className={`capitalize text-gray-800`}> {category.name} </span>
+  // </Link>
 }

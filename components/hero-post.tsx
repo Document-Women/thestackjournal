@@ -33,7 +33,7 @@ export default function HeroPost({
             dangerouslySetInnerHTML={{ __html: title }}
           ></Link>
         </h3>
-        <div>
+        <div className="text-sm">
           By <Author author={author} />
         </div>
       </div>

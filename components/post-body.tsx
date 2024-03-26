@@ -5,8 +5,8 @@ import { ShareFb, ShareLn, ShareLink, ShareTw } from "./share-icons";
 
 export default function PostBody({ content, latest, categories }) {
   return (
-    <div className="container lg:w-4/5 mx-auto my-12">
-      <div className="flex items-start gap-16">
+    <div className="container lg:w-4/5 mx-auto my-4 lg:my-12">
+      <div className="lg:flex items-start gap-16 px-4 lg:px-0">
         <div>
           <div
             className={styles.content}
@@ -14,7 +14,7 @@ export default function PostBody({ content, latest, categories }) {
           />
           <hr className="my-4" />
 
-          <div className="social-icons flex lg:gap-8">
+          <div className="social-icons flex gap-4 lg:gap-8">
             <button className="">
               <ShareTw color={"#B68CFB"} className="hover:opacity-75" />
             </button>
@@ -34,7 +34,7 @@ export default function PostBody({ content, latest, categories }) {
           <hr className="my-4" />
         </div>
 
-        <div className="w-1/4 flex-none">
+        <div className="lg:w-1/4 flex-none">
           {/* <div className="h-[300px] bg-red-500 mt-4">ad space</div> */}
 
           <div className="mb-8 ">
@@ -79,7 +79,7 @@ export default function PostBody({ content, latest, categories }) {
               <Link
                 key={index}
                 href={`/category/${node.slug}`}
-                className="capitalize rounded-full border border-black text-black text-sm px-6 py-3 hover:bg-purple-500 hover:border-purple-500 hover:text-white"
+                className="capitalize rounded-full border border-black text-black text-xs lg:text-sm px-6 py-3 hover:bg-purple-500 hover:border-purple-500 hover:text-white"
               >
                 {node.name}
               </Link>

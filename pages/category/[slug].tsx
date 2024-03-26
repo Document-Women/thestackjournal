@@ -37,12 +37,12 @@ export default function Post({ posts, category }) {
         <Navigation />
         {posts.length > 0 && (
           <>
-            <div className="flex justify-between">
-              <div className="w-1/2 mt-12">
-                <h2 className="text-5xl mb-4 capitalize font-semibold">
+            <div className="lg:flex justify-between">
+              <div className="lg:w-1/2 mt-4 lg:mt-12">
+                <h2 className="text-3xl lg:text-6xl mb-2 lg:mb-4 capitalize font-semibold">
                   {category}
                 </h2>
-                <p className="text-xl leading-normal">
+                <p className="text-lg lg:text-xl leading-normal">
                   {getCategoryDesc(category)}
                 </p>
               </div>
@@ -58,7 +58,7 @@ export default function Post({ posts, category }) {
 
             {/* <SectionSeparator /> */}
 
-            <div className="my-20"></div>
+            <div className="my-8 lg:my-20"></div>
 
             <ThreeColStories posts={posts} limit="3" layout="layoutTwo" />
 
