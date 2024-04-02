@@ -61,7 +61,7 @@ export default function NewsletterBox() {
     // </div>
 
     <div className="lg:flex items-center">
-      <h2 className="lg:w-1/2 text-black text-center text-3xl lg:text-6xl font-bold mb-4">
+      <h2 className="lg:w-1/2 text-black text-center text-2xl lg:text-6xl font-bold mb-4">
         Join our Newsletter
       </h2>
 

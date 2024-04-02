@@ -2,8 +2,39 @@ import Link from "next/link";
 import Category from "./category";
 import styles from "./post-body.module.css";
 import { ShareFb, ShareLn, ShareLink, ShareTw } from "./share-icons";
+import { useEffect, useState } from "react";
+import { TWITTER_HANDLE } from "../lib/constants";
 
-export default function PostBody({ content, latest, categories }) {
+export default function PostBody({ content, title, latest, categories }) {
+  const [copied, setCopied] = useState(false);
+  const [currentUrl, setCurrentUrl] = useState("");
+
+  useEffect(() => {
+    // Check if window object is defined (to ensure code runs on the client-side)
+    if (typeof window !== "undefined") {
+      setCurrentUrl(window.location.href);
+    }
+  }, []);
+  const shareLink = {
+    url: encodeURIComponent(currentUrl),
+    title,
+    twitterHandle: TWITTER_HANDLE,
+  };
+
+  const handleCopy = (link) => {
+    const txarea = document.createElement("textarea") as HTMLTextAreaElement;
+    txarea.value = link;
+    document.body.appendChild(txarea);
+
+    txarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(txarea);
+
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, 1500);
+  };
   return (
     <div className="container lg:w-4/5 mx-auto my-4 lg:my-12">
       <div className="lg:flex items-start gap-16 px-4 lg:px-0">
@@ -15,21 +46,37 @@ export default function PostBody({ content, latest, categories }) {
           <hr className="my-4" />
 
           <div className="social-icons flex gap-4 lg:gap-8">
-            <button className="">
+            <a
+              className=""
+              href={`https://twitter.com/intent/tweet?url=${shareLink.url}&text=${shareLink.title}&via=${shareLink.twitterHandle}`}
+              target="_blank"
+              title="Twitter share link"
+            >
               <ShareTw color={"#B68CFB"} className="hover:opacity-75" />
-            </button>
+            </a>
 
-            <button className="">
+            <a
+              className=""
+              href={`https://www.facebook.com/dialog/share?display=popup&href=${shareLink.url}`}
+              target="_blank"
+              title="Facebook share link"
+            >
               <ShareFb color={"#B68CFB"} className="hover:opacity-75" />
-            </button>
+            </a>
 
-            <button className="">
+            <a
+              className=""
+              href={`https://www.linkedin.com/shareArticle?url=${shareLink.url}&mini=true&title=${shareLink.title}`}
+              target="_blank"
+              title="LinkedIn share link"
+            >
               <ShareLn color={"#B68CFB"} className="hover:opacity-75" />
-            </button>
+            </a>
 
-            <button className="">
+            <button className="" onClick={(e) => handleCopy(shareLink.url)}>
               <ShareLink color={"#B68CFB"} className="hover:opacity-75" />
             </button>
+            <span className="pt-1 italic">{copied && "link copied"}</span>
           </div>
           <hr className="my-4" />
         </div>

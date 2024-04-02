@@ -59,6 +59,7 @@ export default function Post({ post, posts, preview, latest, categories }) {
             />
             <PostBody
               content={post.content}
+              title={post.title}
               latest={latestPosts}
               categories={mostUsedCategories}
             />
