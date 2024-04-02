@@ -17,12 +17,20 @@ import NewsletterBox from "../components/newsletter-box";
 
 export default function Index({ allPosts: { edges }, preview }) {
   // TODO - get all cover stories and sort by date, render the most recent
-  const heroPost = getPostsByCategory(edges, "Cover Story")[0].node; //edges.slice(1);
-  const dearTechSis = getPostsByCategory(edges, "Dear Tech Sis", 10); // TODO - use category slug
-  const featuredPosts = getPostsByCategory(edges, "Featured", 10);
-  const startupPosts = getPostsByCategory(edges, "Startups", 10);
-  const foundersPosts = getPostsByCategory(edges, "Founders", 10);
-  const eventPosts = getPostsByCategory(edges, "Events", 10);
+  // const heroPost = getPostsByCategory(edges, "Cover Story")[0].node; //edges.slice(1);
+  const coverStory = edges.filter(
+    ({ node }) => node.extras.isCoverStory === true
+  )[0].node;
+
+  const featuredPosts = edges.filter(
+    ({ node }) => node.extras.isFeatured === true
+  );
+
+  const dearTechSis = getPostsByCategory(edges, "Dear Tech Sis", 9); // TODO - use category slug
+  // const featuredPosts = getPostsByCategory(edges, "Featured", 9);
+  const startupPosts = getPostsByCategory(edges, "Startups", 9);
+  const foundersPosts = getPostsByCategory(edges, "Founders", 9);
+  const eventPosts = getPostsByCategory(edges, "Events", 9);
 
   return (
     <Layout preview={preview}>
@@ -32,15 +40,15 @@ export default function Index({ allPosts: { edges }, preview }) {
       </Head>
       <Container>
         <Navigation />
-        {heroPost && (
+        {coverStory && (
           <HeroPost
-            title={heroPost.title}
-            coverImage={heroPost.featuredImage}
-            date={heroPost.date}
-            author={heroPost.author}
-            slug={heroPost.slug}
-            excerpt={heroPost.excerpt}
-            category={heroPost.categories.edges[0].node}
+            title={coverStory.title}
+            coverImage={coverStory.featuredImage}
+            date={coverStory.date}
+            author={coverStory.author}
+            slug={coverStory.slug}
+            excerpt={coverStory.excerpt}
+            category={coverStory.categories.edges[0].node}
           />
         )}
         {edges.length > 0 && (

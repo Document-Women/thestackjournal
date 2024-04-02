@@ -106,3 +106,15 @@
 .wp-block-media-text {
   @apply grid grid-cols-2 gap-4;
 }
+
+.publication-name {
+  display: none!important;
+}
+
+#main.use-theme-bg {
+  background: green!important;
+}
+
+iframe html {
+  background-color: red!important;
+}

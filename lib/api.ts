@@ -1,5 +1,7 @@
 const API_URL = process.env.WORDPRESS_API_URL;
 
+const numberOfPosts = 100
+
 async function fetchAPI(query = "", { variables }: Record<string, any> = {}) {
   const headers = { "Content-Type": "application/json" };
 
@@ -92,9 +94,6 @@ export async function getAllCategories() {
   return data;
 }
 
-
-const numberOfPosts = 50
-
 export async function getAllPostsForHome(preview) {
   const data = await fetchAPI(
     `
@@ -113,6 +112,10 @@ export async function getAllPostsForHome(preview) {
                   slug
                 }
               }
+            }
+            extras {
+              isCoverStory
+              isFeatured
             }
             featuredImage {
               node {

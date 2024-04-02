@@ -18,7 +18,8 @@ export default function EventCard({
   const eventType = randy(["Virtual Event", "In-Person Event"]);
 
   return (
-    <Link href={`/posts/${slug}`}>
+    //  href={`/posts/${slug}`}
+    <div>
       <div
         className="flex text-white rounded-[16px] lg:rounded-[30px] bg-center bg-no-repeat bg-cover mb-2"
         style={{
@@ -59,7 +60,7 @@ export default function EventCard({
           >
             <Link
               href={`/posts/${slug}`}
-              className="hover:underline"
+              className="hover:underline line-clamp-3"
               dangerouslySetInnerHTML={{ __html: title }}
             ></Link>
           </h3>
@@ -67,6 +68,6 @@ export default function EventCard({
           <div className="text-lg text-red-500">{eventType}</div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }

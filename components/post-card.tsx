@@ -16,7 +16,8 @@ export default function PostCard({
   size = "", // for big or small card - default undefined = big
 }) {
   return (
-    <Link href={`/posts/${slug}`}>
+    // <Link href={`/posts/${slug}`} /> // can't have <a> inside <a> // how then...?
+    <div>
       <div
         className="flex text-white rounded-[16px] lg:rounded-[30px] bg-top bg-no-repeat bg-cover mb-2"
         style={{
@@ -45,18 +46,18 @@ export default function PostCard({
           >
             <Link
               href={`/posts/${slug}`}
-              className="hover:underline"
+              className="hover:underline line-clamp-3"
               dangerouslySetInnerHTML={{ __html: title }}
             ></Link>
           </h3>
           {/* only show for non small postcards */}
           {!size && (
-            <>
+            <div style={{ color: getColor(category.name) }}>
               By <Author author={author} />{" "}
-            </>
+            </div>
           )}
         </div>
       </div>
-    </Link>
+    </div>
   );
 }

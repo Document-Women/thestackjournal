@@ -25,8 +25,33 @@ import NewsletterBox from "../../components/newsletter-box";
 import Image from "next/image";
 import { getCategoryDesc } from "../../lib/category-params";
 import { sluggify, unslug } from "../../lib/helpers";
+// import { handleLoadMore } from "../../lib/actions";
+import { useEffect, useState } from "react";
 
 export default function Post({ posts, category }) {
+  type DataType = {
+    id: number;
+    name: string;
+    year: number;
+    color: string;
+    pantone_value: string;
+  };
+
+  const [postData, setPostData] = useState(posts);
+
+  const [data, setData] = useState<DataType[]>([]);
+
+  const handleLoadMore = async (e) => {
+    e.preventDefault();
+    const edges = await (await fetch(`/api/fetcher/${category}`)).json();
+    // console.log([...edges, ...postData]);
+    setPostData((prev) => [...prev, ...edges]);
+  };
+
+  useEffect(() => {
+    // console.log({ postData });
+  }, [postData]);
+
   return (
     <Layout preview={false}>
       <Head>
@@ -35,7 +60,18 @@ export default function Post({ posts, category }) {
       </Head>
       <Container>
         <Navigation />
-        {posts.length > 0 && (
+        {data &&
+          data.map((item, index) => {
+            return (
+              <ul key={item.id + index}>
+                <li>{item.name}</li>
+                <li>{item.year}</li>
+              </ul>
+            );
+          })}
+        <SectionSeparator />
+
+        {postData.length > 0 && (
           <>
             <div className="lg:flex justify-between">
               <div className="lg:w-1/2 mt-4 lg:mt-12">
@@ -56,11 +92,18 @@ export default function Post({ posts, category }) {
               />
             </div>
 
-            {/* <SectionSeparator /> */}
-
             <div className="my-8 lg:my-20"></div>
 
-            <ThreeColStories posts={posts} limit="3" layout="layoutTwo" />
+            <ThreeColStories posts={postData} limit="3" layout="layoutTwo" />
+
+            <div className="my-8 text-center">
+              <button
+                className="rounded-full border border-purple-500 text-purple-500 hover:bg-purple-500 hover:text-white text-lg px-6 py-3"
+                onClick={handleLoadMore}
+              >
+                Load More Articles
+              </button>
+            </div>
 
             <SectionSeparator />
 

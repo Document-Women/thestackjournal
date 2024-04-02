@@ -20,7 +20,7 @@ export default function CoverImage({ title, coverImage, slug }: Props) {
       alt={`Cover Image for ${title}`}
       src={coverImage?.node.sourceUrl}
       className={cn("shadow-small", {
-        "hover:shadow-medium transition-shadow duration-200 object-cover h-[300px] lg:h-[600px]":
+        "hover:shadow-medium transition-shadow duration-200 object-cover object-top h-[300px] lg:h-[600px]":
           slug,
       })}
     />
