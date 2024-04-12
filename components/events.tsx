@@ -1,3 +1,4 @@
+import { randy } from "../lib/helpers";
 import EventCard from "./event-card";
 import PostCard from "./post-card";
 
@@ -6,6 +7,10 @@ export default function Events({ posts, limit }) {
    * find a way to pass it down from graphql
    * done!
    */
+
+  //
+  const eventTypes = ["Virtual Event", "In-Person Event"];
+
   return (
     <div>
       <section>
@@ -30,6 +35,7 @@ export default function Events({ posts, limit }) {
                   slug={node.slug}
                   excerpt={node.excerpt}
                   category={node.categories?.edges[0]?.node}
+                  eventType={randy(eventTypes)}
                 />
               );
             }

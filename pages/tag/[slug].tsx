@@ -15,8 +15,8 @@ import Tags from "../../components/tags";
 import {
   getAllPostsWithSlug,
   getPostAndMorePosts,
-  getAllPostsByCategory,
-  getAllCategories,
+  getAllPostsByTag,
+  getAlltags,
 } from "../../lib/api";
 import { CMS_NAME } from "../../lib/constants";
 import Navigation from "../../components/navigation";
@@ -28,7 +28,7 @@ import { sluggify, unslug } from "../../lib/helpers";
 // import { handleLoadMore } from "../../lib/actions";
 import { useEffect, useState } from "react";
 
-export default function Post({ posts, category }) {
+export default function Tag({ posts, tag }) {
   type DataType = {
     id: number;
     name: string;
@@ -43,14 +43,10 @@ export default function Post({ posts, category }) {
 
   const handleLoadMore = async (e) => {
     e.preventDefault();
-    const edges = await (await fetch(`/api/category/${category}`)).json();
+    const edges = await (await fetch(`/api/tag/${tag}`)).json();
     // console.log([...edges, ...postData]);
     setPostData((prev) => [...prev, ...edges]);
   };
-
-  useEffect(() => {
-    // console.log({ postData });
-  }, [postData]);
 
   return (
     <Layout preview={false}>
@@ -73,37 +69,20 @@ export default function Post({ posts, category }) {
 
         {postData.length > 0 && (
           <>
-            <div className="lg:flex justify-between">
-              <div className="lg:w-1/2 mt-4 lg:mt-12">
-                <h2 className="text-3xl lg:text-6xl mb-2 lg:mb-4 capitalize font-semibold">
-                  {category}
-                </h2>
-                <p className="text-lg lg:text-xl leading-normal">
-                  {getCategoryDesc(category)}
-                </p>
-              </div>
-
-              <Image
-                className=""
-                src={`/images/${sluggify(category)}.png`}
-                alt={""}
-                width={400}
-                height={300}
-              />
-            </div>
-
             <div className="my-8 lg:my-20"></div>
 
             <ThreeColStories posts={postData} limit="3" layout="layoutTwo" />
 
-            <div className="my-8 text-center">
-              <button
-                className="rounded-full border border-purple-500 text-purple-500 hover:bg-purple-500 hover:text-white text-lg px-6 py-3"
-                onClick={handleLoadMore}
-              >
-                Load More Articles
-              </button>
-            </div>
+            {posts.length > 9 && (
+              <div className="my-8 text-center">
+                <button
+                  className="rounded-full border border-purple-500 text-purple-500 hover:bg-purple-500 hover:text-white text-lg px-6 py-3"
+                  onClick={handleLoadMore}
+                >
+                  Load More Articles
+                </button>
+              </div>
+            )}
 
             <SectionSeparator />
 
@@ -118,19 +97,22 @@ export default function Post({ posts, category }) {
 }
 
 export const getStaticProps = async ({ params }) => {
-  const { edges } = await getAllPostsByCategory(params?.slug);
+  const { edges } = await getAllPostsByTag(params?.slug);
 
   return {
-    props: { posts: edges, category: unslug(params.slug) },
+    props: { posts: edges, tag: unslug(params.slug) },
     revalidate: 10,
   };
 };
 
 export const getStaticPaths = async () => {
-  const { categories } = await getAllCategories();
-  const paths = categories.edges.map(({ node }) => ({
-    params: { slug: node.slug, foo: "bar" }, // no other props allowed. i need to raise an issue on github
+  const { tags } = await getAlltags();
+
+  const paths = tags.edges.map(({ node }) => ({
+    params: { slug: node.slug },
   }));
+
+  paths.push({ params: { slug: "foobar" } }); // for testing ONLY
 
   return {
     paths,

@@ -19,6 +19,7 @@ import {
 import { CMS_NAME } from "../../lib/constants";
 import Navigation from "../../components/navigation";
 import Footer from "../../components/footer";
+import NewsletterBox from "../../components/newsletter-box";
 
 export default function Post({ post, posts, preview, latest, categories }) {
   const latestPosts = latest?.edges;
@@ -83,6 +84,9 @@ export default function Post({ post, posts, preview, latest, categories }) {
                 </div>
                 <MoreStories posts={morePosts} limit={3} />
               </div>
+              <SectionSeparator />
+
+              <NewsletterBox />
             </Container>
           )}
         </>

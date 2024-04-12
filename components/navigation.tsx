@@ -82,6 +82,14 @@ const Navigation = () => {
                   Essays
                 </a>
               </li>
+              <li className="mx-3">
+                <a
+                  href="/category/news"
+                  className="text-purple-800 hover:text-gray-500"
+                >
+                  News
+                </a>
+              </li>
               <li
                 className="relative mx-3"
                 onClick={toggleDropdown}
@@ -120,14 +128,6 @@ const Navigation = () => {
                           className="hover:text-gray-500"
                         >
                           Awards & Events
-                        </a>
-                      </li>
-                      <li className="my-2">
-                        <a
-                          href="/category/news"
-                          className="hover:text-gray-500"
-                        >
-                          News/Announcement
                         </a>
                       </li>
                       <li className="my-2">

@@ -10,3 +10,23 @@ export const randy = (array: any[]) => array[Math.round(Math.random() * array.le
 export const sluggify = (i) => i.split(" ").join("-")
 
 export const unslug = (i) => i.split("-").join(" ")
+
+export const sendEmail = async (subject, message, setDone) => {
+    try {
+      const data = await (
+        await fetch("/api/mailer", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ subject, message }),
+        })
+      ).json();
+      console.log({ data });
+      setDone(true);
+      setTimeout(() => {
+        setDone(false);
+      }, 3000);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  

@@ -3,7 +3,6 @@ import Date from "./date";
 import CoverImage from "./cover-image";
 import Link from "next/link";
 import Category, { styleEnums } from "./category";
-import { randy } from "../lib/helpers";
 
 export default function EventCard({
   title,
@@ -14,9 +13,8 @@ export default function EventCard({
   slug,
   category,
   size = "",
+  eventType,
 }) {
-  const eventType = randy(["Virtual Event", "In-Person Event"]);
-
   return (
     //  href={`/posts/${slug}`}
     <div>

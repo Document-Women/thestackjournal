@@ -9,8 +9,10 @@ import SectionSeparator from "./section-separator";
 export default function Stories({ posts, heading = "", limit, layout }) {
   const getLayout = (layout: string, column: string) => layouts[layout][column];
   const singlePost = posts.slice(0, 1);
-  const multiplePosts = posts.slice(1, 4);
-  const plainPosts = posts.slice(4, 9);
+  const plainPosts = posts.slice(1, 6);
+  const multiplePosts = posts.slice(6, 9);
+  // const multiplePosts = posts.slice(1, 4);
+  // const plainPosts = posts.slice(4, 9);
   const morePosts = posts.slice(10);
 
   return (

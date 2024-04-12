@@ -81,11 +81,27 @@ export async function getAllPostsWithSlug() {
 export async function getAllCategories() {
   const data = await fetchAPI(`
     {
-      categories(first: 11) {
+      categories {
         edges {
           node {
             slug
             name
+            link
+          }
+        }
+      }
+    }
+  `);
+  return data;
+}
+
+export async function getAlltags() {
+  const data = await fetchAPI(`
+    {
+      tags {
+        edges {
+          node {
+            slug
           }
         }
       }
@@ -185,6 +201,50 @@ export async function getAllPostsByCategory(category) {
     {
       variables: {
         category
+      },
+    },
+  );
+
+  return data?.posts;
+}
+
+export async function getAllPostsByTag(tag) {
+  const data = await fetchAPI(
+    `
+    query getAllPostsByTags($tag: String!) {
+      posts(where: {tag: $tag, status: PUBLISH}) {
+        edges {
+          node {
+            author {
+              node {
+                name
+                slug
+              }
+            }
+            categories {
+              edges {
+                node {
+                  name
+                  slug
+                  id
+                }
+              }
+            }
+            slug
+            title
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+          }
+        }
+      }
+    }
+  `,
+    {
+      variables: {
+        tag
       },
     },
   );
