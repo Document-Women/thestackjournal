@@ -10,21 +10,14 @@ import Header from "../../components/header";
 import PostHeader from "../../components/post-header";
 import SectionSeparator from "../../components/section-separator";
 import Layout from "../../components/layout";
-import PostTitle from "../../components/post-title";
-import Tags from "../../components/tags";
-import {
-  getAllPostsWithSlug,
-  getPostAndMorePosts,
-  getAllPostsByTag,
-  getAlltags,
-} from "../../lib/api";
+import { getAllPostsByTag, getAlltags } from "../../lib/api";
 import { CMS_NAME } from "../../lib/constants";
 import Navigation from "../../components/navigation";
 import Footer from "../../components/footer";
 import NewsletterBox from "../../components/newsletter-box";
 import Image from "next/image";
 import { getCategoryDesc } from "../../lib/category-params";
-import { sluggify, unslug } from "../../lib/helpers";
+import { capitalize, sluggify, unslug } from "../../lib/helpers";
 // import { handleLoadMore } from "../../lib/actions";
 import { useEffect, useState } from "react";
 
@@ -60,8 +53,7 @@ export default function Tag({ posts, tag, endCursor, hasNextPage }) {
   return (
     <Layout preview={false}>
       <Head>
-        {/* ${CMS_NAME} */}
-        <title>{`${tag} - The Stack Journal | Promoting women in tech `}</title>
+        <title>{`${capitalize(tag)} - ${CMS_NAME} `}</title>
       </Head>
       <Container>
         <Navigation />
@@ -97,7 +89,6 @@ export default function Tag({ posts, tag, endCursor, hasNextPage }) {
               </div>
             )}
 
-            {/* <SectionSeparator /> */}
             <NewsletterBox />
           </>
         )}
@@ -108,7 +99,11 @@ export default function Tag({ posts, tag, endCursor, hasNextPage }) {
   );
 }
 
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({
+  params,
+}: {
+  params: any;
+}) => {
   const {
     edges,
     pageInfo: { endCursor, hasNextPage },
@@ -120,7 +115,7 @@ export const getStaticProps = async ({ params }) => {
   };
 };
 
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const { tags } = await getAlltags();
 
   const paths = tags.edges.map(({ node }) => ({

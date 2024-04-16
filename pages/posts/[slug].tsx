@@ -29,7 +29,8 @@ export default function Post({ post, posts, preview, latest, categories }) {
   // const featuredPosts = getPostsByCategory(posts?.edges, "Featured");
 
   if (!router.isFallback && !post?.slug) {
-    return <ErrorPage statusCode={404} />;
+    // return <ErrorPage statusCode={404} />;
+    return <h1>404</h1>;
   }
 
   return (

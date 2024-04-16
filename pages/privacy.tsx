@@ -1,15 +1,18 @@
+import Head from "next/head";
 import Container from "../components/container";
 import Footer from "../components/footer";
 import Layout from "../components/layout";
 import Navigation from "../components/navigation";
 import SectionSeparator from "../components/section-separator";
 import preview from "./api/preview";
+import { CMS_NAME } from "../lib/constants";
 
 export default function ContactUs() {
-  const subject = "New TSJ Newsletter Subscriber!";
-
   return (
     <Layout preview={preview}>
+      <Head>
+        <title>{`Privacy Policy - ${CMS_NAME} `}</title>
+      </Head>
       <Container>
         <Navigation />
 

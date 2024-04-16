@@ -1,11 +1,11 @@
 import Alert from "./alert";
 import Meta from "./meta";
 
-export default function Layout({ preview, children }) {
+export default function Layout({ preview, children, ...rest }) {
   return (
     <>
       <Meta />
-      <div className="min-h-screen">
+      <div className="min-h-screen" {...rest}>
         {/* Alert is more like a top banner present in all pages - zeelz */}
         {/* <Alert preview={preview} /> */}
         <main>{children}</main>

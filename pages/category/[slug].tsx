@@ -24,7 +24,7 @@ import Footer from "../../components/footer";
 import NewsletterBox from "../../components/newsletter-box";
 import Image from "next/image";
 import { getCategoryDesc } from "../../lib/category-params";
-import { sluggify, unslug } from "../../lib/helpers";
+import { capitalize, sluggify, unslug } from "../../lib/helpers";
 // import { handleLoadMore } from "../../lib/actions";
 import { useEffect, useState } from "react";
 
@@ -59,8 +59,7 @@ export default function Post({ posts, category, endCursor, hasNextPage }) {
   return (
     <Layout preview={false}>
       <Head>
-        {/* ${CMS_NAME} */}
-        <title>{`${category} - The Stack Journal | Promoting women in tech `}</title>
+        <title>{`${capitalize(category)} - ${CMS_NAME} `}</title>
       </Head>
       <Container>
         <Navigation />

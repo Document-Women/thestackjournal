@@ -7,6 +7,8 @@ import SectionSeparator from "../components/section-separator";
 import preview from "./api/preview";
 import { sendEmail } from "../lib/helpers";
 import NewsletterBox from "../components/newsletter-box";
+import Head from "next/head";
+import { CMS_NAME } from "../lib/constants";
 
 export default function ContactUs() {
   const [done, setDone] = useState(false);
@@ -34,6 +36,9 @@ export default function ContactUs() {
 
   return (
     <Layout preview={preview}>
+      <Head>
+        <title>{`Contact - ${CMS_NAME} `}</title>
+      </Head>
       <Container>
         <Navigation />
 

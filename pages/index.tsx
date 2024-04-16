@@ -35,8 +35,7 @@ export default function Index({ allPosts: { edges }, preview }) {
   return (
     <Layout preview={preview}>
       <Head>
-        {/* ${CMS_NAME} */}
-        <title>{`The Stack Journal | Promoting women in tech `}</title>
+        <title>{CMS_NAME}</title>
       </Head>
       <Container>
         <Navigation />
