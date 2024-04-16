@@ -14,12 +14,14 @@ export default function PostCard({
   slug, // for article link
   category,
   size = "", // for big or small card - default undefined = big
+  type = "", // single vs multiple
 }) {
   return (
-    // <Link href={`/posts/${slug}`} /> // can't have <a> inside <a> // how then...?
-    <div>
+    <div className={type === "multiple" ? "md:w-1/3 lg:w-auto" : ""}>
+      {" "}
+      {/** if this post card is of type 'multiple' */}
       <div
-        className="flex text-white rounded-[16px] lg:rounded-[30px] bg-top bg-no-repeat bg-cover mb-2"
+        className=" flex text-white rounded-[16px] lg:rounded-[30px] bg-top bg-no-repeat bg-cover mb-2"
         style={{
           backgroundImage: `url(${coverImage?.node.sourceUrl})`,
         }}

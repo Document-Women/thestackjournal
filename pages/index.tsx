@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { GetStaticProps } from "next";
+import { GetStaticProps, GetServerSideProps } from "next";
 import Container from "../components/container";
 import MoreStories from "../components/more-stories";
 import ThreeColStories from "../components/three-column-stories";
@@ -53,7 +53,7 @@ export default function Index({ allPosts: { edges }, preview }) {
         )}
         {edges.length > 0 && (
           <>
-            <div className="mt-16"></div>
+            <div className="mt-20"></div>
             <MoreStories heading={"Featured"} posts={featuredPosts} limit="3" />
 
             <SectionSeparator />
@@ -107,11 +107,14 @@ export default function Index({ allPosts: { edges }, preview }) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
+// export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  preview = false,
+}) => {
   const allPosts = await getAllPostsForHome(preview);
 
   return {
     props: { allPosts, preview },
-    revalidate: 10,
+    // revalidate: 10,
   };
 };

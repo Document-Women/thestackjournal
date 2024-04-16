@@ -28,7 +28,7 @@ import { sluggify, unslug } from "../../lib/helpers";
 // import { handleLoadMore } from "../../lib/actions";
 import { useEffect, useState } from "react";
 
-export default function Tag({ posts, tag }) {
+export default function Tag({ posts, tag, endCursor, hasNextPage }) {
   type DataType = {
     id: number;
     name: string;
@@ -38,21 +38,30 @@ export default function Tag({ posts, tag }) {
   };
 
   const [postData, setPostData] = useState(posts);
+  const [postEndCursor, setPostEndCursor] = useState(endCursor);
+  const [postHasNextPage, setpostHasNextPage] = useState(hasNextPage);
 
   const [data, setData] = useState<DataType[]>([]);
 
   const handleLoadMore = async (e) => {
     e.preventDefault();
-    const edges = await (await fetch(`/api/tag/${tag}`)).json();
-    // console.log([...edges, ...postData]);
+    const res = await fetch(`/api/tag/${tag}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ endCursor: postEndCursor }),
+    });
+    const { edges, pageInfo } = await res.json();
+    console.log({ pageInfo });
     setPostData((prev) => [...prev, ...edges]);
+    setPostEndCursor(pageInfo.endCursor);
+    setpostHasNextPage(pageInfo.hasNextPage);
   };
 
   return (
     <Layout preview={false}>
       <Head>
         {/* ${CMS_NAME} */}
-        <title>{`The Stack Journal | Promoting women in tech `}</title>
+        <title>{`${tag} - The Stack Journal | Promoting women in tech `}</title>
       </Head>
       <Container>
         <Navigation />
@@ -69,11 +78,15 @@ export default function Tag({ posts, tag }) {
 
         {postData.length > 0 && (
           <>
-            <div className="my-8 lg:my-20"></div>
+            <div className="my-8 lg:my-20">
+              <h1 className="border-b text-3xl lg:text-6xl mb-2 lg:mb-4 pb-2 lg:pb-4 capitalize font-semibold">
+                {tag}
+              </h1>
+            </div>
 
             <ThreeColStories posts={postData} limit="3" layout="layoutTwo" />
 
-            {posts.length > 9 && (
+            {postHasNextPage && (
               <div className="my-8 text-center">
                 <button
                   className="rounded-full border border-purple-500 text-purple-500 hover:bg-purple-500 hover:text-white text-lg px-6 py-3"
@@ -84,8 +97,7 @@ export default function Tag({ posts, tag }) {
               </div>
             )}
 
-            <SectionSeparator />
-
+            {/* <SectionSeparator /> */}
             <NewsletterBox />
           </>
         )}
@@ -97,10 +109,13 @@ export default function Tag({ posts, tag }) {
 }
 
 export const getStaticProps = async ({ params }) => {
-  const { edges } = await getAllPostsByTag(params?.slug);
+  const {
+    edges,
+    pageInfo: { endCursor, hasNextPage },
+  } = await getAllPostsByTag(params?.slug);
 
   return {
-    props: { posts: edges, tag: unslug(params.slug) },
+    props: { posts: edges, endCursor, hasNextPage, tag: unslug(params.slug) },
     revalidate: 10,
   };
 };
@@ -111,8 +126,6 @@ export const getStaticPaths = async () => {
   const paths = tags.edges.map(({ node }) => ({
     params: { slug: node.slug },
   }));
-
-  paths.push({ params: { slug: "foobar" } }); // for testing ONLY
 
   return {
     paths,

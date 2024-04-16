@@ -1,4 +1,4 @@
-const API_URL = process.env.WORDPRESS_API_URL;
+const API_URL = process.env.WORDPRESS_API_URL || '';
 
 const numberOfPosts = 100
 
@@ -81,7 +81,7 @@ export async function getAllPostsWithSlug() {
 export async function getAllCategories() {
   const data = await fetchAPI(`
     {
-      categories {
+      categories(first: 20) {
         edges {
           node {
             slug
@@ -98,7 +98,7 @@ export async function getAllCategories() {
 export async function getAlltags() {
   const data = await fetchAPI(`
     {
-      tags {
+      tags(first: 100) {
         edges {
           node {
             slug
@@ -164,11 +164,11 @@ export async function getAllPostsForHome(preview) {
   return data?.posts;
 }
 
-export async function getAllPostsByCategory(category) {
+export async function getAllPostsByCategory(category, endCursor = "") {
   const data = await fetchAPI(
     `
-    query getAllPostsByCategory($category: String!) {
-      posts(where: {categoryName: $category, status: PUBLISH}) {
+    query getAllPostsByCategory($category: String!, $endCursor: String) {
+      posts(first : 9, after: $endCursor, where: {categoryName: $category, status: PUBLISH}) {
         edges {
           node {
             author {
@@ -183,6 +183,7 @@ export async function getAllPostsByCategory(category) {
                   name
                   slug
                   id
+                  description
                 }
               }
             }
@@ -195,12 +196,17 @@ export async function getAllPostsByCategory(category) {
             }
           }
         }
+        pageInfo {
+          endCursor
+          hasNextPage
+        }
       }
     }
   `,
     {
       variables: {
-        category
+        category,
+        endCursor
       },
     },
   );
@@ -208,11 +214,12 @@ export async function getAllPostsByCategory(category) {
   return data?.posts;
 }
 
-export async function getAllPostsByTag(tag) {
+export async function getAllPostsByTag(tag, endCursor = "") {
+  console.log(endCursor);
   const data = await fetchAPI(
     `
-    query getAllPostsByTags($tag: String!) {
-      posts(where: {tag: $tag, status: PUBLISH}) {
+    query getAllPostsByTags($tag: String!, $endCursor: String) {
+      posts(first: 9, after: $endCursor, where: {tag: $tag, status: PUBLISH}) {
         edges {
           node {
             author {
@@ -239,12 +246,17 @@ export async function getAllPostsByTag(tag) {
             }
           }
         }
+        pageInfo {
+          endCursor
+          hasNextPage
+        }
       }
     }
   `,
     {
       variables: {
-        tag
+        tag,
+        endCursor
       },
     },
   );
