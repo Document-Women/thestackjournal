@@ -169,7 +169,7 @@ const Navigation = () => {
         <div className="fixed inset-0 z-50 bg-black bg-opacity-50">
           <div className="h-full absolute inset-x-0 px-5 pt-2__ bg-white">
             <div className="flex items-center justify-between my-3">
-              <a href="#" className="text-2xl font-bold">
+              <a href="/" className="text-2xl font-bold">
                 <Image
                   src={"/images/the-stack-journal-logo.png"}
                   alt=""

@@ -53,7 +53,7 @@ export default function Index({ allPosts: { edges }, preview }) {
         )}
         {edges.length > 0 && (
           <>
-            <div className="mt-16"></div>
+            <div className="mt-20"></div>
             <MoreStories heading={"Featured"} posts={featuredPosts} limit="3" />
 
             <SectionSeparator />
