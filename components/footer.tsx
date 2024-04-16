@@ -146,10 +146,10 @@ export default function Footer() {
               action=""
               className="flex__ flex-col item-end__ lg:w-[350px] lg:h-[300px] lg:text-right"
             >
-              <h4 className="text-2xl mb-4">We are building a community</h4>
+              <h4 className="text-2xl mb-4">Join our community</h4>
               <p className="">
-                Join our waiting list to be part of the first ones to know when
-                we launch
+                Get first access to Opportunities, Resources, Industry Reports &
+                more.
               </p>
 
               <input
