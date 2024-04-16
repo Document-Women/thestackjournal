@@ -30,3 +30,4 @@ export const sendEmail = async (subject, message, setDone) => {
     }
   };
   
+export const capitalize = (str) => str[0].toUpperCase() + str.slice(1)

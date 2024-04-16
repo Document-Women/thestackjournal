@@ -17,7 +17,7 @@ import Footer from "../../components/footer";
 import NewsletterBox from "../../components/newsletter-box";
 import Image from "next/image";
 import { getCategoryDesc } from "../../lib/category-params";
-import { sluggify, unslug } from "../../lib/helpers";
+import { capitalize, sluggify, unslug } from "../../lib/helpers";
 // import { handleLoadMore } from "../../lib/actions";
 import { useEffect, useState } from "react";
 
@@ -53,7 +53,7 @@ export default function Tag({ posts, tag, endCursor, hasNextPage }) {
   return (
     <Layout preview={false}>
       <Head>
-        <title>{`${tag} - ${CMS_NAME} `}</title>
+        <title>{`${capitalize(tag)} - ${CMS_NAME} `}</title>
       </Head>
       <Container>
         <Navigation />

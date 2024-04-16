@@ -103,7 +103,7 @@ export default function Stories({ posts, heading = "", limit, layout }) {
         {morePosts.length > 0 && (
           <>
             <SectionSeparator />
-            <div className="md:flex md:gap-12 xl:gap-16 flex-wrap">
+            <div className="md:flex md:gap-12 flex-wrap">
               {morePosts.map(({ node }, index: number) => {
                 if (index % 3 === 0) {
                   return (

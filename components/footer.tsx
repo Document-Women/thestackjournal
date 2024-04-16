@@ -25,7 +25,7 @@ export default function Footer() {
     sendEmail(subject, body, setDone);
   };
   return (
-    <footer className="bg-amber-100 border-t border-accent-2 mt-16 py-20">
+    <footer className="bg-amber-100 border-t border-accent-2 mt-16 py-16 lg:py-20">
       <Container>
         <div className="flex flex-col lg:flex-row items-start">
           <div className="lg:w-1/3 mb-8">

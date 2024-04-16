@@ -47,7 +47,7 @@ const Navigation = () => {
     <>
       {/* Desktop Menu */}
       {/* <nav className="hidden md:flex md:items-center md:justify-between md:px-4"> */}
-      <div className="hidden lg:block my-8">
+      <div className="hidden lg:block py-8">
         <div className="p-4 columns-3__">
           <Link href="/" className="w-1/5 inline-block align-middle">
             <Image
