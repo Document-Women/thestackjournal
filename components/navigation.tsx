@@ -1,16 +1,26 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { sluggify } from "../lib/helpers";
+import SectionSeparator from "./section-separator";
 
 const Navigation = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<any>();
+
+  const menuItems = ["Startups", "Dear Tech Sis", "Founders", "Essays", "News"];
+
+  const moreCategories = [
+    "Awards",
+    "Events",
+    "Opportunities",
+    "Industry Report",
+  ];
 
   const toggleMobileMenu = () => {
     setShowMobileMenu(!showMobileMenu);
   };
-
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -37,7 +47,7 @@ const Navigation = () => {
     <>
       {/* Desktop Menu */}
       {/* <nav className="hidden md:flex md:items-center md:justify-between md:px-4"> */}
-      <div className="hidden md:block my-8">
+      <div className="hidden lg:block my-8">
         <div className="p-4 columns-3__">
           <Link href="/" className="w-1/5 inline-block align-middle">
             <Image
@@ -50,46 +60,16 @@ const Navigation = () => {
 
           <div className="w-3/5 inline-block align-middle">
             <ul className="flex justify-center text-sm">
-              <li className="mx-3">
-                <a
-                  href="/category/startups"
-                  className="text-purple-800 hover:text-gray-500"
-                >
-                  Startups
-                </a>
-              </li>
-              <li className="mx-3">
-                <a
-                  href="/category/dear-tech-sis"
-                  className="text-purple-800 hover:text-gray-500"
-                >
-                  Dear Tech Sis
-                </a>
-              </li>
-              <li className="mx-3">
-                <a
-                  href="/category/founders"
-                  className="text-purple-800 hover:text-gray-500"
-                >
-                  Founders
-                </a>
-              </li>
-              <li className="mx-3">
-                <a
-                  href="/category/essays"
-                  className="text-purple-800 hover:text-gray-500"
-                >
-                  Essays
-                </a>
-              </li>
-              <li className="mx-3">
-                <a
-                  href="/category/news"
-                  className="text-purple-800 hover:text-gray-500"
-                >
-                  News
-                </a>
-              </li>
+              {menuItems.map((item, index) => (
+                <li key={index} className="mx-3">
+                  <a
+                    href={`/category/${sluggify(item.toLocaleLowerCase())}`}
+                    className="capitalize text-purple-800 border-b border-white hover:pb-1 hover:border-purple-800"
+                  >
+                    {item}
+                  </a>
+                </li>
+              ))}
               <li
                 className="relative mx-3"
                 onClick={toggleDropdown}
@@ -97,7 +77,7 @@ const Navigation = () => {
               >
                 <a
                   href="#"
-                  className="flex items-start text-purple-800 hover:text-gray-500"
+                  className="flex items-start text-purple-800 border-b border-white hover:pb-1 hover:border-purple-800"
                 >
                   More
                   <svg
@@ -116,36 +96,24 @@ const Navigation = () => {
                   </svg>
                 </a>
                 <div
-                  className={`flex absolute z-10 bg-white mt-2 w-[600px]__ border rounded-lg shadow-xl ${
+                  className={`flex absolute z-10 bg-white mt-1 border rounded-base shadow-lg ${
                     dropdownOpen ? "block" : "hidden"
                   }`}
                 >
-                  <div className="flex justify-between p-8">
-                    <ul className="flex flex-col">
-                      <li className="my-2">
-                        <a
-                          href="/category/events"
-                          className="hover:text-gray-500"
-                        >
-                          Awards & Events
-                        </a>
-                      </li>
-                      <li className="my-2">
-                        <a
-                          href="/category/opportunities"
-                          className="hover:text-gray-500"
-                        >
-                          Opportunities
-                        </a>
-                      </li>
-                      <li className="my-2">
-                        <a
-                          href="/category/industry-report"
-                          className="hover:text-gray-500"
-                        >
-                          Industry Report
-                        </a>
-                      </li>
+                  <div className="flex justify-between px-8 py-4">
+                    <ul className="flex flex-col text-nowrap">
+                      {moreCategories.map((i, index) => (
+                        <li key={index} className="my-2">
+                          <a
+                            href={`/category/${sluggify(
+                              i.toLocaleLowerCase()
+                            )}`}
+                            className="border-b border-white hover:pb-1 hover:border-purple-800"
+                          >
+                            {i}
+                          </a>
+                        </li>
+                      ))}
                     </ul>
                     <img
                       src="https://via.placeholder.com/300x75"
@@ -163,7 +131,7 @@ const Navigation = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div className="md:hidden my-3">
+      <div className="lg:hidden my-3">
         <div className="flex items-center justify-between">
           <a href="#" className="text-2xl font-bold">
             <Image
@@ -193,12 +161,13 @@ const Navigation = () => {
             </svg>
           </button>
         </div>
+        {/* {showMobileMenu && <div className="bg-red h-screen"></div>} */}
       </div>
 
       {/* Mobile Menu Overlay */}
       {showMobileMenu && (
         <div className="fixed inset-0 z-50 bg-black bg-opacity-50">
-          <div className="absolute inset-x-0 top-0 p-4 bg-white">
+          <div className="h-full absolute inset-x-0 px-5 pt-2__ bg-white">
             <div className="flex items-center justify-between my-3">
               <a href="#" className="text-2xl font-bold">
                 <Image
@@ -210,7 +179,7 @@ const Navigation = () => {
               </a>
               <button
                 onClick={toggleMobileMenu}
-                className="text-gray-600 hover:text-gray-800"
+                className="px-3 py-2 rounded hover:bg-gray-200"
               >
                 <svg
                   className="w-6 h-6"
@@ -228,39 +197,20 @@ const Navigation = () => {
                 </svg>
               </button>
             </div>
-            <ul className="mt-8 space-y-4">
-              <li className="">
-                <a
-                  href="/category/startups"
-                  className="text-purple-800 hover:bg-gray-200 block p-3"
-                >
-                  Startups
-                </a>
-              </li>
-              <li className="">
-                <a
-                  href="/category/dear-tech-sis"
-                  className="text-purple-800 hover:bg-gray-200 block p-3"
-                >
-                  Dear Tech Sis
-                </a>
-              </li>
-              <li className="">
-                <a
-                  href="/category/founders"
-                  className="text-purple-800 hover:bg-gray-200 block p-3"
-                >
-                  Founders
-                </a>
-              </li>
-              <li className="">
-                <a
-                  href="/category/essays"
-                  className="text-purple-800 hover:bg-gray-200 block p-3"
-                >
-                  Essays
-                </a>
-              </li>
+
+            <SectionSeparator />
+
+            <ul className="text-2xl">
+              {[...menuItems, ...moreCategories].map((item, index) => (
+                <li key={index} className="py-3">
+                  <a
+                    href={`/category/${sluggify(item.toLocaleLowerCase())}`}
+                    className="text-purple-800 hover:underline"
+                  >
+                    {item}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>

@@ -46,7 +46,7 @@ export const categoryParams = {
     
 export function getColor(category: string): string {
     const key = category.toLowerCase()  || 'uncategorized'// return lime for uncategoried
-    return categoryParams[key]['color'] || '';
+    return categoryParams[key]?.color || categoryParams['uncategorized'].color;
 };
 
 export function getCategoryDesc(category: string): string {

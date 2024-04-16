@@ -28,7 +28,8 @@ import { sluggify, unslug } from "../../lib/helpers";
 // import { handleLoadMore } from "../../lib/actions";
 import { useEffect, useState } from "react";
 
-export default function Post({ posts, category }) {
+export default function Post({ posts, category, endCursor, hasNextPage }) {
+  const categoryDesc = posts[0]?.node.categories.edges[0].node.description;
   type DataType = {
     id: number;
     name: string;
@@ -38,37 +39,32 @@ export default function Post({ posts, category }) {
   };
 
   const [postData, setPostData] = useState(posts);
-
-  const [data, setData] = useState<DataType[]>([]);
+  const [postEndCursor, setPostEndCursor] = useState(endCursor);
+  const [postHasNextPage, setpostHasNextPage] = useState(hasNextPage);
 
   const handleLoadMore = async (e) => {
     e.preventDefault();
-    const edges = await (await fetch(`/api/category/${category}`)).json();
-    // console.log([...edges, ...postData]);
+    const res = await fetch(`/api/category/${category}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ endCursor: postEndCursor }),
+    });
+    const { edges, pageInfo } = await res.json();
+
+    setPostEndCursor(pageInfo.endCursor);
+    setpostHasNextPage(pageInfo.hasNextPage);
     setPostData((prev) => [...prev, ...edges]);
   };
-
-  useEffect(() => {
-    // console.log({ postData });
-  }, [postData]);
 
   return (
     <Layout preview={false}>
       <Head>
         {/* ${CMS_NAME} */}
-        <title>{`The Stack Journal | Promoting women in tech `}</title>
+        <title>{`${category} - The Stack Journal | Promoting women in tech `}</title>
       </Head>
       <Container>
         <Navigation />
-        {data &&
-          data.map((item, index) => {
-            return (
-              <ul key={item.id + index}>
-                <li>{item.name}</li>
-                <li>{item.year}</li>
-              </ul>
-            );
-          })}
+
         <SectionSeparator />
 
         {postData.length > 0 && (
@@ -79,7 +75,8 @@ export default function Post({ posts, category }) {
                   {category}
                 </h2>
                 <p className="text-lg lg:text-xl leading-normal">
-                  {getCategoryDesc(category)}
+                  {/* {getCategoryDesc(category)} */}
+                  {categoryDesc}
                 </p>
               </div>
 
@@ -96,14 +93,16 @@ export default function Post({ posts, category }) {
 
             <ThreeColStories posts={postData} limit="3" layout="layoutTwo" />
 
-            <div className="my-8 text-center">
-              <button
-                className="rounded-full border border-purple-500 text-purple-500 hover:bg-purple-500 hover:text-white text-lg px-6 py-3"
-                onClick={handleLoadMore}
-              >
-                Load More Articles
-              </button>
-            </div>
+            {postHasNextPage && (
+              <div className="my-8 text-center">
+                <button
+                  className="rounded-full border border-purple-500 text-purple-500 hover:bg-purple-500 hover:text-white text-lg px-6 py-3"
+                  onClick={handleLoadMore}
+                >
+                  Load More Articles
+                </button>
+              </div>
+            )}
 
             <SectionSeparator />
 
@@ -118,18 +117,29 @@ export default function Post({ posts, category }) {
 }
 
 export const getStaticProps = async ({ params }) => {
-  const { edges } = await getAllPostsByCategory(params?.slug);
+  const {
+    edges,
+    pageInfo: { endCursor, hasNextPage },
+  } = await getAllPostsByCategory(params?.slug);
 
   return {
-    props: { posts: edges, category: unslug(params.slug) },
+    props: {
+      posts: edges,
+      endCursor,
+      hasNextPage,
+      category: unslug(params.slug),
+    },
     revalidate: 10,
   };
 };
 
 export const getStaticPaths = async () => {
   const { categories } = await getAllCategories();
+
   const paths = categories.edges.map(({ node }) => ({
-    params: { slug: node.slug, foo: "bar" }, // no other props allowed. i need to raise an issue on github
+    params: { slug: node.slug, foo: "bar" },
+    // no other props allowed. i need to raise an issue on github
+    // i even needed cate desc but i simply can't get it
   }));
 
   return {

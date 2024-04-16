@@ -73,7 +73,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="lg:w-1/3 md:flex gap-20">
+          <div className="lg:w-1/3 sm:flex gap-12 xl:gap-20">
             <ul className="mb-8">
               <li className="text-lg font-bold mb-4">Company</li>
               <li className="mb-4">
@@ -92,11 +92,6 @@ export default function Footer() {
                 </a>
               </li>
               <li className="mb-4">
-                <a href="#" className="hover:text-purple-800">
-                  Company Info
-                </a>
-              </li>
-              <li className="mb-4">
                 <a href="/careers" className="hover:text-purple-800">
                   Careers
                 </a>
@@ -104,7 +99,7 @@ export default function Footer() {
             </ul>
 
             <ul className="mb-8">
-              <li className="text-lg font-bold mb-4">Categories</li>
+              <li className="text-lg font-bold mb-4">Tags</li>
               <li className="mb-4">
                 <a href="/tag/ai" className="hover:text-purple-800">
                   AI
@@ -124,8 +119,8 @@ export default function Footer() {
                 </a>
               </li>
               <li className="mb-4">
-                <a href="/category/startups" className="hover:text-purple-800">
-                  Startups
+                <a href="/tag/startup" className="hover:text-purple-800">
+                  Startup
                 </a>
               </li>
               <li className="mb-4">
@@ -145,7 +140,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="ml-auto">
+          <div className="lg:ml-auto">
             <form
               onSubmit={handleSubmit}
               action=""
