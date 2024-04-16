@@ -59,8 +59,7 @@ export default function Post({ posts, category, endCursor, hasNextPage }) {
   return (
     <Layout preview={false}>
       <Head>
-        {/* ${CMS_NAME} */}
-        <title>{`${category} - The Stack Journal | Promoting women in tech `}</title>
+        <title>{`${category} - ${CMS_NAME} `}</title>
       </Head>
       <Container>
         <Navigation />
