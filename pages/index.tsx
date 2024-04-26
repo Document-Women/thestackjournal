@@ -76,11 +76,11 @@ export default function Index({ allPosts: { edges }, preview }) {
             {/* <h3>Ad Space</h3> */}
 
             <Image
-              src="https://res.cloudinary.com/do3qitis2/image/upload/q_auto/f_auto/www.shopwithme.com_de3lfj"
+              src="https://res.cloudinary.com/do3qitis2/image/upload/v1714121765/ad_lztuum.webp"
               alt="advert"
               width={800}
               height={360}
-              className="w-full my-12 lg:my-28"
+              className="w-full my-12 lg:my-28 rounded-3xl lg:rounded-[3rem]"
             />
 
             <ThreeColStories

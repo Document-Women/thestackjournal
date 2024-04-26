@@ -17,7 +17,7 @@ export default function HeroPost({
   const colour = getColor(category.name);
   return (
     <section>
-      <div className="border relative mb-8 lg:mb-16 rounded-[16px] lg:rounded-[45px] overflow-hidden z-0">
+      <div className="border relative mb-8 lg:mb-16 rounded-2xl lg:rounded-[42px] overflow-hidden z-0">
         {coverImage && true && (
           <CoverImage title={title} coverImage={coverImage} slug={slug} />
         )}
