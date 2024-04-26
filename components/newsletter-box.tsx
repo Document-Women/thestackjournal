@@ -50,7 +50,7 @@ export default function NewsletterBox() {
 
   return (
     <div
-      className="flex flex-col text-white  bg-center bg-no-repeat bg-cover mt-8 lg:mt-20 p-4 lg:py-20"
+      className="flex flex-col lg:w-3/4 text-white rounded-2xl lg:rounded-[42px] bg-center bg-no-repeat bg-cover mt-8 lg:mt-20 mx-auto p-4 lg:py-20"
       style={{
         backgroundImage:
           "url(https://res.cloudinary.com/do3qitis2/image/upload/q_auto/f_auto/letter-box_kq0gbh)",
