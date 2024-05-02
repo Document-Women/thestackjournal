@@ -16,7 +16,7 @@ export default function PostBody({ content, title, latest, categories }) {
     }
   }, []);
   const shareLink = {
-    url: encodeURIComponent(currentUrl),
+    url: currentUrl, // encodeURIComponent(currentUrl) encoding not necessary except query params
     title,
     twitterHandle: TWITTER_HANDLE,
   };
