@@ -20,17 +20,18 @@ import { CMS_NAME } from "../../lib/constants";
 import Navigation from "../../components/navigation";
 import Footer from "../../components/footer";
 import NewsletterBox from "../../components/newsletter-box";
+import NotFound from "../404";
 
 export default function Post({ post, posts, preview, latest, categories }) {
   const latestPosts = latest?.edges;
   const mostUsedCategories = categories?.edges; //.slice(8);
   const router = useRouter();
-  const morePosts = posts?.edges; // TODO - get related posts by ... may category and tags 🤷🏽‍♂️
+  const morePosts = posts?.edges; // TODO - get related posts by ... maybe category and tags 🤷🏽‍♂️
   // const featuredPosts = getPostsByCategory(posts?.edges, "Featured");
 
   if (!router.isFallback && !post?.slug) {
     // return <ErrorPage statusCode={404} />;
-    return <h1>404</h1>;
+    return <NotFound />;
   }
 
   return (
@@ -103,17 +104,22 @@ export const getStaticProps: GetStaticProps = async ({
   preview = false,
   previewData,
 }) => {
-  const data = await getPostAndMorePosts(params?.slug, preview, previewData);
-  // Object.assign(data, { latest }); TODO - get latest articles
+  let data,
+    postsByCategory = null;
 
-  const category = data.post.categories.edges[0].node.categoryId;
-  const tags = data.post.tags.edges.map(({ node }) => node.name);
+  try {
+    data = await getPostAndMorePosts(params?.slug, preview, previewData);
+    // Object.assign(data, { latest }); TODO - get latest articles
 
-  const postsByCategory = await getAllPostsByCategoryAndTags(
-    params?.slug,
-    category,
-    tags
-  );
+    const category = data.post?.categories.edges[0].node.categoryId;
+    const tags = data.post?.tags.edges.map(({ node }) => node.name);
+
+    postsByCategory = await getAllPostsByCategoryAndTags(
+      params?.slug,
+      category,
+      tags
+    );
+  } catch (error) {}
 
   return {
     props: {
@@ -131,6 +137,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const allPosts = await getAllPostsWithSlug();
   return {
     paths: allPosts.edges.map(({ node }) => `/posts/${node.slug}`) || [],
-    fallback: false,
+    fallback: true,
   };
 };
