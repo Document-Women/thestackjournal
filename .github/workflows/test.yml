@@ -16,7 +16,12 @@ jobs:
           git config user.name "docuwomen"
           git commit --allow-empty -am "Empty commit to trigger deploy"
 
-      - name: Push with AD-M
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.DOCUWOMEN_PAT }}
+      - name: Push
+        run: git push origin main
+        env:
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.DOCUWOMEN_PAT }}
+
+      # - name: Push with AD-M
+      #   uses: ad-m/github-push-action@master
+      #   with:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
