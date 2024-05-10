@@ -12,4 +12,4 @@ jobs:
 
       - name: echo
         run: |
-          echo "we good!"
+          echo "are we good?"
