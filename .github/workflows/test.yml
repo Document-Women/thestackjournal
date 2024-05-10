@@ -9,17 +9,15 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.DOCUWOMEN_PAT }}
 
       - name: Push empty commit
         run: |
-          git config user.email "support@documentwomen.com"
-          git config user.name "docuwomen"
-          git commit --allow-empty -am "Empty commit to trigger deploy"
-
-      - name: Push
-        run: git push origin main
-        env:
-          PERSONAL_ACCESS_TOKEN: ${{ secrets.DOCUWOMEN_PAT }}
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+          git commit --allow-empty -m "Empty commit to trigger deploy"
+          git push
 
       # - name: Push with AD-M
       #   uses: ad-m/github-push-action@master
