@@ -12,4 +12,6 @@ jobs:
 
       - name: Push empty commit
         run: |
+          git config user.email "support@documentwomen.com"
+          git config user.name "docuwomen"
           git commit --allow-empty -am "Empty commit to trigger deploy" && git push origin main
