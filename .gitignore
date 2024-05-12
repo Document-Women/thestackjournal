@@ -38,5 +38,5 @@ next-env.d.ts
 
 .ZEELZ.md
 graphql
-*.next/
+# *.next/
 .local
