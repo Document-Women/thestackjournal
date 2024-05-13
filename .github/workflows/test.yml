@@ -16,7 +16,8 @@ jobs:
         uses: actions/setup-node@v2
 
       - name: install deps
-        run: npm ci
+        run: |
+          npm install
 
       - name: run build
         run: npm run build
