@@ -6,6 +6,10 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      WORDPRESS_API_URL: https://wp.thestackjournal.com/graphql
+      FROM_EMAIL: thestackjournal@gmail.com
+      TO_EMAIL: thestackjournal@gmail.com
     steps:
       - name: checkout
         uses: actions/checkout@v3
