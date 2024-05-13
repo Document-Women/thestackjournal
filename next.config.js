@@ -11,7 +11,7 @@ const { protocol, hostname, port, pathname } = new URL(
 
 /** @type {import('next').NextConfig} */
 module.exports = {
-  output: "export",
+  // output: "export",
   // distDir: "dist",
   images: {
     domains: ['wp.thestackjournal.com', 'secure.gravatar.com', 'res.cloudinary.com'],
