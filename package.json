@@ -3,9 +3,9 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start",
+    "start:local": "next start",
     "lint": "next lint",
-    "serve": "NODE_ENV=production node server.js"
+    "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
     "@google-cloud/local-auth": "^3.0.1",

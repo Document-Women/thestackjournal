@@ -12,6 +12,12 @@ jobs:
         with:
           token: ${{ secrets.DOCUWOMEN_PAT }}
 
+      - name: setup node
+        uses: actions/setup-node@v2
+
+      - name: run build
+        run: npm run build
+
       - name: Push empty commit
         run: |
           git config user.email "actions@github.com"
