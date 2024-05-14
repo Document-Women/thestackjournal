@@ -110,6 +110,21 @@ export async function getAlltags() {
   return data;
 }
 
+export async function getAllAuthors() {
+  const data = await fetchAPI(`
+    {
+      users(first: 100) {
+        edges {
+          node {
+            slug
+          }
+        }
+      }
+    }
+  `);
+  return data;
+}
+
 export async function getAllPostsForHome(preview) {
   const data = await fetchAPI(
     `
@@ -143,6 +158,7 @@ export async function getAllPostsForHome(preview) {
                 name
                 firstName
                 lastName
+                slug
                 avatar {
                   url
                 }
@@ -264,6 +280,56 @@ export async function getAllPostsByTag(tag, endCursor = "") {
   return data?.posts;
 }
 
+export async function getAllPostsByAuthor(author, endCursor = "") {
+  console.log(endCursor);
+  const data = await fetchAPI(
+    `
+    query getAllPostsByTags($author: String!, $endCursor: String) {
+      posts(first: 9, after: $endCursor, where: {authorName: $author, status: PUBLISH}) {
+        edges {
+          node {
+            author {
+              node {
+                name
+                slug
+              }
+            }
+            categories {
+              edges {
+                node {
+                  name
+                  slug
+                  id
+                }
+              }
+            }
+            slug
+            title
+            featuredImage {
+              node {
+                sourceUrl
+              }
+            }
+          }
+        }
+        pageInfo {
+          endCursor
+          hasNextPage
+        }
+      }
+    }
+  `,
+    {
+      variables: {
+        author,
+        endCursor
+      },
+    },
+  );
+
+  return data?.posts;
+}
+
 export async function getAllPostsByCategoryAndTags(slug, category, tags) {
   // query AllPosts($categories: [ID] = [4, 5, 6], $tags: [String] = ["health", "data", "news"])
 
@@ -337,6 +403,7 @@ export async function getPostAndMorePosts(slug, preview, previewData) {
       name
       firstName
       lastName
+      slug
       avatar {
         url
       }

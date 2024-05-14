@@ -7,11 +7,10 @@ export default function Avatar({ author }) {
     ? `${author.node.firstName} ${author.node.lastName}`
     : author.node.name || null;
 
+  // author name should link to author's posts  // but slug has fetch, why?
   return (
-    // <Link href={""}>
-    // author name should link to author's posts - https://wp.thestackjournal.com/author/miratsj/
-    // but slug has fetch, why?
-    <span className="font-semi-bold">{name}</span>
-    // </Link>
+    <Link href={`/author/${author.node.slug}`}>
+      <span className="font-semi-bold">{name}</span>
+    </Link>
   );
 }
