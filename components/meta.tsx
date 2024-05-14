@@ -34,6 +34,8 @@ export default function Meta() {
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       <meta name="description" content={`${CMS_NAME}.`} />
       <meta property="og:image" content={HOME_OG_IMAGE_URL} />
+      {/* Google Adsense */}
+      <meta name="google-adsense-account" content="ca-pub-6858930580553924" />
     </Head>
   );
 }
