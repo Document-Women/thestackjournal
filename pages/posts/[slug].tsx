@@ -33,9 +33,9 @@ export default function Post({ post, posts, preview, latest, categories }) {
     // return <ErrorPage statusCode={404} />;
     return <NotFound />;
   }
-
+  console.log({ post });
   return (
-    <Layout preview={preview}>
+    <Layout preview={preview} post={post}>
       <Container>
         {/* <Header /> */}
         <Navigation />
@@ -48,10 +48,7 @@ export default function Post({ post, posts, preview, latest, categories }) {
           <article>
             <Head>
               <title>{`${post.title} | ${CMS_NAME}`}</title>
-              <meta
-                property="og:image"
-                content={post.featuredImage?.node.sourceUrl}
-              />
+              {/* <meta> tags allowed here */}
             </Head>
             <PostHeader
               title={post.title}

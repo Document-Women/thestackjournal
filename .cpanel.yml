@@ -1,5 +1,0 @@
----
-deployment:
-  tasks:
-    - export DEPLOYPATH=/home/wp.maktaba.wiki/app5/
-    - /bin/cp *.yml $DEPLOYPATH
