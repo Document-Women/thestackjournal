@@ -75,6 +75,7 @@ export default function Meta({ ...rest }) {
 
       <meta property="og:type" content="article" />
       <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@TheStackJournal" />
     </Head>
   );
 }
