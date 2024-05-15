@@ -50,13 +50,27 @@ export default function Meta({ ...rest }) {
       {/* opengraph tags */}
 
       {date && <meta property="article:published_time" content={date} />}
-      {/* 2023-09-13T11:09:00+01:00 */}
-
       {featuredImage && (
-        <meta property="og:image" content={featuredImage?.node.sourceUrl} />
+        <>
+          <meta property="og:image" content={featuredImage?.node.sourceUrl} />
+          <meta
+            property="twitter:image"
+            content={featuredImage?.node.sourceUrl}
+          />
+        </>
       )}
-      {excerpt && <meta property="og:description" content={excerpt} />}
-      {excerpt && <meta property="og:title" content={title} />}
+      {excerpt && (
+        <>
+          <meta property="og:description" content={excerpt} />
+          <meta property="twitter:description" content={excerpt} />
+        </>
+      )}
+      {title && (
+        <>
+          <meta property="og:title" content={title} />
+          <meta property="twitter:title" content={title} />
+        </>
+      )}
       {slug && <meta property="og:url" content={`${CMS_URL}/posts/${slug}`} />}
 
       <meta property="og:type" content="article" />
