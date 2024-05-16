@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { sluggify } from "../lib/helpers";
+import { sluggify, uuid } from "../lib/helpers";
 import SectionSeparator from "./section-separator";
 
 const Navigation = () => {
@@ -60,8 +60,8 @@ const Navigation = () => {
 
           <div className="w-3/5 inline-block align-middle">
             <ul className="flex justify-center text-sm">
-              {menuItems.map((item, index) => (
-                <li key={index} className="mx-3">
+              {menuItems.map((item) => (
+                <li key={uuid()} className="mx-3">
                   <a
                     href={`/category/${sluggify(item.toLocaleLowerCase())}`}
                     className="capitalize text-purple-800 border-b border-white hover:pb-1 hover:border-purple-800"
@@ -102,8 +102,8 @@ const Navigation = () => {
                 >
                   <div className="flex justify-between px-8 py-4">
                     <ul className="flex flex-col text-nowrap">
-                      {moreCategories.map((i, index) => (
-                        <li key={index} className="my-2">
+                      {moreCategories.map((i) => (
+                        <li key={uuid()} className="my-2">
                           <a
                             href={`/category/${sluggify(
                               i.toLocaleLowerCase()
@@ -201,8 +201,8 @@ const Navigation = () => {
             <SectionSeparator />
 
             <ul className="text-2xl">
-              {[...menuItems, ...moreCategories].map((item, index) => (
-                <li key={index} className="py-3">
+              {[...menuItems, ...moreCategories].map((item) => (
+                <li key={uuid()} className="py-3">
                   <a
                     href={`/category/${sluggify(item.toLocaleLowerCase())}`}
                     className="text-purple-800 hover:underline"

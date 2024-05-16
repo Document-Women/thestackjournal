@@ -4,6 +4,7 @@ import styles from "./post-body.module.css";
 import { ShareFb, ShareLn, ShareLink, ShareTw } from "./share-icons";
 import { useEffect, useState } from "react";
 import { TWITTER_HANDLE } from "../lib/constants";
+import { uuid } from "../lib/helpers";
 
 export default function PostBody({ content, title, latest, categories }) {
   const [copied, setCopied] = useState(false);
@@ -88,10 +89,10 @@ export default function PostBody({ content, title, latest, categories }) {
             <h4 className="text-2xl font-semibold my-2">Latest News</h4>
             <hr className="mb-4" />
 
-            {latest.map(({ node }, index) => (
+            {latest.map(({ node }) => (
               <Link
                 href={`/posts/${node.slug}`}
-                key={index}
+                key={uuid()}
                 className="inline-block text-lg mb-4 hover:underline"
               >
                 {node.title}
@@ -122,9 +123,9 @@ export default function PostBody({ content, title, latest, categories }) {
           </div>
 
           <div className="flex flex-wrap gap-1 my-8">
-            {categories.map(({ node }, index) => (
+            {categories.map(({ node }) => (
               <Link
-                key={index}
+                key={uuid()}
                 href={`/category/${node.slug}`}
                 className="capitalize rounded-full border border-black text-black text-xs lg:text-sm px-6 py-3 hover:bg-purple-500 hover:border-purple-500 hover:text-white"
               >

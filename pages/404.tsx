@@ -5,6 +5,7 @@ import Layout from "../components/layout";
 import preview from "./api/preview";
 import Container from "../components/container";
 import Navigation from "../components/navigation";
+import Footer from "../components/footer";
 
 export default function NotFound() {
   return (

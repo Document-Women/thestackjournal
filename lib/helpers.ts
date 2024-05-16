@@ -1,3 +1,5 @@
+import { v4 } from "uuid";
+
 export const getPostsByCategory = (posts, category, limit = posts.length) => {
     const filteredPosts = posts.filter((edge) =>
         edge.node.categories.edges.some(({node}) => node.name === category)
@@ -30,4 +32,5 @@ export const sendEmail = async (subject, message, setDone) => {
     }
   };
   
-export const capitalize = (str) => str[0].toUpperCase() + str.slice(1)
+export const capitalize = (str) => str && str[0].toUpperCase() + str.slice(1)
+export const uuid = v4

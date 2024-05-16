@@ -23,13 +23,11 @@ import Navigation from "../../components/navigation";
 import Footer from "../../components/footer";
 import NewsletterBox from "../../components/newsletter-box";
 import Image from "next/image";
-import { getCategoryDesc } from "../../lib/category-params";
 import { capitalize, sluggify, unslug } from "../../lib/helpers";
 // import { handleLoadMore } from "../../lib/actions";
 import { useEffect, useState } from "react";
 
 export default function Post({ posts, category, endCursor, hasNextPage }) {
-  const categoryDesc = posts[0]?.node.categories.edges[0].node.description;
   type DataType = {
     id: number;
     name: string;
@@ -38,6 +36,7 @@ export default function Post({ posts, category, endCursor, hasNextPage }) {
     pantone_value: string;
   };
 
+  const categoryDesc = posts[0]?.node.categories.edges[0].node.description;
   const [postData, setPostData] = useState(posts);
   const [postEndCursor, setPostEndCursor] = useState(endCursor);
   const [postHasNextPage, setpostHasNextPage] = useState(hasNextPage);
@@ -66,7 +65,7 @@ export default function Post({ posts, category, endCursor, hasNextPage }) {
 
         <SectionSeparator />
 
-        {postData.length > 0 && (
+        {postData?.length > 0 && (
           <>
             <div className="lg:flex justify-between">
               <div className="lg:w-1/2 mt-4 lg:mt-12">
@@ -74,7 +73,6 @@ export default function Post({ posts, category, endCursor, hasNextPage }) {
                   {category}
                 </h2>
                 <p className="text-lg lg:text-xl leading-normal">
-                  {/* {getCategoryDesc(category)} */}
                   {categoryDesc}
                 </p>
               </div>

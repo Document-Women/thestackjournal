@@ -53,7 +53,7 @@ export default function Index({ allPosts: { edges }, preview }) {
         {edges.length > 0 && (
           <>
             <div className="mt-20"></div>
-            <MoreStories heading={"Featured"} posts={featuredPosts} limit="3" />
+            <MoreStories heading={"Featured"} posts={featuredPosts} />
 
             <SectionSeparator />
 
@@ -106,14 +106,14 @@ export default function Index({ allPosts: { edges }, preview }) {
   );
 }
 
-// export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
-export const getServerSideProps: GetServerSideProps = async ({
-  preview = false,
-}) => {
+export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
+  // export const getServerSideProps: GetServerSideProps = async ({
+  //   preview = false,
+  // }) => {
   const allPosts = await getAllPostsForHome(preview);
 
   return {
     props: { allPosts, preview },
-    // revalidate: 10,
+    revalidate: 10,
   };
 };

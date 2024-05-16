@@ -231,7 +231,6 @@ export async function getAllPostsByCategory(category, endCursor = "") {
 }
 
 export async function getAllPostsByTag(tag, endCursor = "") {
-  console.log(endCursor);
   const data = await fetchAPI(
     `
     query getAllPostsByTags($tag: String!, $endCursor: String) {
@@ -281,7 +280,6 @@ export async function getAllPostsByTag(tag, endCursor = "") {
 }
 
 export async function getAllPostsByAuthor(author, endCursor = "") {
-  console.log(endCursor);
   const data = await fetchAPI(
     `
     query getAllPostsByTags($author: String!, $endCursor: String) {
@@ -332,12 +330,12 @@ export async function getAllPostsByAuthor(author, endCursor = "") {
 
 export async function getAllPostsByCategoryAndTags(slug, category, tags) {
   // query AllPosts($categories: [ID] = [4, 5, 6], $tags: [String] = ["health", "data", "news"])
-
-  // console.log({category});
+  // category not used, not necessary
+  const limit = 4 // cos the subject post will be filtered out - 3
   const data = await fetchAPI(
     `
-    query AllPosts($categories: [ID]!, $tags: [String]!) {
-      posts(first: 4, where: {categoryIn: $categories, tagSlugIn: $tags}) {
+    query PostsByTags($tags: [String]!) {
+      posts(first: ${limit}, where: {tagSlugIn: $tags, status: PUBLISH, orderby: {field: DATE, order: DESC}}) {
         edges {
           node {
             title
@@ -374,15 +372,21 @@ export async function getAllPostsByCategoryAndTags(slug, category, tags) {
   `,
     {
       variables: {
-        categories: [category],
         tags
       },
     },
   );
 
 
-  // Filter out the main post // just so the subject post is not returned
+  // Filter out the main post // just so the subject post is not returned for related posts
   data.posts.edges = data.posts.edges.filter(({ node }) => node.slug !== slug);
+
+  // Filter posts to find those that match at least 2 of the tags (chat gpt)
+  // const relatedPosts = posts.filter(post => {
+  //   const postTagIds = post.tags.nodes.map(tag => tag.id);
+  //   const matchedTagCount = postTagIds.filter(tagId => tagIds.includes(tagId)).length;
+  //   return matchedTagCount >= 2;
+  // });
 
   return data?.posts;
 }

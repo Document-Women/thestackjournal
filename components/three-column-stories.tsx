@@ -3,8 +3,8 @@ import { layouts } from "../lib/layouts";
 import PostCard from "./post-card";
 import Author from "./author";
 import Link from "next/link";
-import { v4 as uuidv4 } from "uuid";
 import SectionSeparator from "./section-separator";
+import { uuid } from "../lib/helpers";
 
 export default function Stories({ posts, heading = "", limit, layout }) {
   const getLayout = (layout: string, column: string) => layouts[layout][column];
@@ -24,10 +24,10 @@ export default function Stories({ posts, heading = "", limit, layout }) {
             className="inline-block w-full lg:w-1/2"
             style={{ order: getLayout(layout, "single") }}
           >
-            {singlePost.map(({ node }: any, index: number) => {
+            {singlePost.map(({ node }: any) => {
               return (
                 <PostCard
-                  key={uuidv4()}
+                  key={uuid()}
                   title={node.title}
                   coverImage={node.featuredImage}
                   date={node.date}
@@ -44,10 +44,10 @@ export default function Stories({ posts, heading = "", limit, layout }) {
             className="md:flex md:gap-4 lg:inline-block lg:w-1/4 mt-4 lg:mt-0"
             style={{ order: getLayout(layout, "multiple") }}
           >
-            {multiplePosts.map(({ node }: any, index: number) => {
+            {multiplePosts.map(({ node }: any) => {
               return (
                 <PostCard
-                  key={node.slug}
+                  key={uuid()}
                   title={node.title}
                   coverImage={node.featuredImage}
                   date={node.date}
@@ -68,7 +68,7 @@ export default function Stories({ posts, heading = "", limit, layout }) {
           >
             {plainPosts.map(({ node }, index: number) => {
               return (
-                <div className="mb-4" key="index">
+                <div className="mb-4" key={uuid()}>
                   <Link
                     href={`/category/${node.categories.edges[0]?.node.slug}`}
                   >
@@ -109,7 +109,7 @@ export default function Stories({ posts, heading = "", limit, layout }) {
                   return (
                     <div
                       className="md:inline-block md:w-[44%] lg:w-[30%] mb-4 md:mb-0"
-                      key={node.slug}
+                      key={uuid()}
                     >
                       <PostCard
                         title={node.title}
