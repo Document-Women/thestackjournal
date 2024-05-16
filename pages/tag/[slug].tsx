@@ -17,7 +17,7 @@ import Footer from "../../components/footer";
 import NewsletterBox from "../../components/newsletter-box";
 import Image from "next/image";
 import { getCategoryDesc } from "../../lib/category-params";
-import { capitalize, sluggify, unslug } from "../../lib/helpers";
+import { capitalize, sluggify, unslug, uuid } from "../../lib/helpers";
 // import { handleLoadMore } from "../../lib/actions";
 import { useEffect, useState } from "react";
 
@@ -58,9 +58,9 @@ export default function Tag({ posts, tag, endCursor, hasNextPage }) {
       <Container>
         <Navigation />
         {data &&
-          data.map((item, index) => {
+          data.map((item) => {
             return (
-              <ul key={item.id + index}>
+              <ul key={uuid()}>
                 <li>{item.name}</li>
                 <li>{item.year}</li>
               </ul>

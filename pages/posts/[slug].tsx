@@ -21,19 +21,25 @@ import Navigation from "../../components/navigation";
 import Footer from "../../components/footer";
 import NewsletterBox from "../../components/newsletter-box";
 import NotFound from "../404";
+import { PuffLoader } from "react-spinners";
 
 export default function Post({ post, posts, preview, latest, categories }) {
   const latestPosts = latest?.edges;
   const mostUsedCategories = categories?.edges; //.slice(8);
   const router = useRouter();
-  const morePosts = posts?.edges; // TODO - get related posts by ... maybe category and tags 🤷🏽‍♂️
-  // const featuredPosts = getPostsByCategory(posts?.edges, "Featured");
+  const morePosts = posts?.edges; // 3 most recent related posts by at least 2 tags returned
 
   if (!router.isFallback && !post?.slug) {
     // return <ErrorPage statusCode={404} />;
     return <NotFound />;
   }
-  console.log({ post });
+
+  // return (
+  //   <div className="flex flex-col h-screen items-center justify-center">
+  //     <PuffLoader color="#6b21a8" />
+  //   </div>
+  // );
+  // work on this, spinner maybe
   return (
     <Layout preview={preview} post={post}>
       <Container>
@@ -42,7 +48,9 @@ export default function Post({ post, posts, preview, latest, categories }) {
       </Container>
 
       {router.isFallback ? (
-        <PostTitle>Loading…</PostTitle>
+        <div className="flex flex-col h-screen items-center justify-center">
+          <PuffLoader color="#6b21a8" />
+        </div>
       ) : (
         <>
           <article>
@@ -81,7 +89,7 @@ export default function Post({ post, posts, preview, latest, categories }) {
                   </h3>
                   <div className="grow border-t border-black"></div>
                 </div>
-                <MoreStories posts={morePosts} limit={3} />
+                <MoreStories posts={morePosts} />
               </div>
               <SectionSeparator />
 
@@ -104,19 +112,20 @@ export const getStaticProps: GetStaticProps = async ({
   let data,
     postsByCategory = null;
 
-  try {
-    data = await getPostAndMorePosts(params?.slug, preview, previewData);
-    // Object.assign(data, { latest }); TODO - get latest articles
+  data = await getPostAndMorePosts(params?.slug, preview, previewData);
 
+  // this if checks if data.post returns truthy or null,
+  // when post w/ slug isn't found no need to call getAllPostsByCategoryAndTags(), else fetchAPI error
+  // old approach was try/catch, fetchAPI still fails
+  if (data.post) {
     const category = data.post?.categories.edges[0].node.categoryId;
     const tags = data.post?.tags.edges.map(({ node }) => node.name);
-
     postsByCategory = await getAllPostsByCategoryAndTags(
       params?.slug,
       category,
       tags
     );
-  } catch (error) {}
+  }
 
   return {
     props: {

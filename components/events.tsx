@@ -1,4 +1,4 @@
-import { randy } from "../lib/helpers";
+import { uuid } from "../lib/helpers";
 import EventCard from "./event-card";
 import PostCard from "./post-card";
 
@@ -27,7 +27,7 @@ export default function Events({ posts, limit }) {
             if (index < limit) {
               return (
                 <EventCard
-                  key={node.slug}
+                  key={uuid()}
                   title={node.title}
                   coverImage={node.featuredImage}
                   date={node.date}
@@ -35,7 +35,7 @@ export default function Events({ posts, limit }) {
                   slug={node.slug}
                   excerpt={node.excerpt}
                   category={node.categories?.edges[0]?.node}
-                  eventType={randy(eventTypes)}
+                  eventType={eventTypes[1]}
                 />
               );
             }
