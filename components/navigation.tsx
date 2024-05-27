@@ -133,7 +133,7 @@ const Navigation = () => {
       {/* Mobile Menu */}
       <div className="lg:hidden my-3">
         <div className="flex items-center justify-between">
-          <a href="#" className="text-2xl font-bold">
+          <a href="/" className="text-2xl font-bold">
             <Image
               src={"/images/the-stack-journal-logo.png"}
               alt=""
