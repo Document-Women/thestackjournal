@@ -14,6 +14,7 @@ import Footer from "../components/footer";
 import Image from "next/image";
 import Events from "../components/events";
 import NewsletterBox from "../components/newsletter-box";
+import Link from "next/link";
 
 export default function Index({ allPosts: { edges }, preview }) {
   // TODO - get all cover stories and sort by date, render the most recent
@@ -22,9 +23,9 @@ export default function Index({ allPosts: { edges }, preview }) {
     ({ node }) => node.extras.isCoverStory === true
   )[0].node;
 
-  const featuredPosts = edges.filter(
-    ({ node }) => node.extras.isFeatured === true
-  );
+  const featuredPosts = edges
+    .filter(({ node }) => node.extras.isFeatured === true)
+    .slice(0, 3);
 
   const dearTechSis = getPostsByCategory(edges, "Dear Tech Sis", 9); // TODO - use category slug
   // const featuredPosts = getPostsByCategory(edges, "Featured", 9);
@@ -75,13 +76,15 @@ export default function Index({ allPosts: { edges }, preview }) {
 
             {/* <h3>Ad Space</h3> */}
 
-            <Image
-              src="https://res.cloudinary.com/do3qitis2/image/upload/v1714121765/ad_lztuum.webp"
-              alt="advert"
-              width={800}
-              height={360}
-              className="w-full my-12 lg:my-28 rounded-3xl lg:rounded-[3rem]"
-            />
+            <Link href="mailto:hello@thestackjournal.com">
+              <Image
+                src="https://res.cloudinary.com/do3qitis2/image/upload/v1714121765/ad_lztuum.webp"
+                alt="advert"
+                width={800}
+                height={360}
+                className="w-full my-12 lg:my-28 rounded-3xl lg:rounded-[3rem]"
+              />
+            </Link>
 
             <ThreeColStories
               posts={foundersPosts}
