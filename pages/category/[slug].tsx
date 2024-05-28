@@ -79,7 +79,7 @@ export default function Post({ posts, category, endCursor, hasNextPage }) {
 
               <Image
                 className=""
-                src={`/images/${sluggify(category)}.png`}
+                src={`/images/${sluggify(category)}.svg`}
                 alt={""}
                 width={400}
                 height={300}
