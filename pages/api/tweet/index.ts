@@ -6,11 +6,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     
     if (req.method === 'POST') {
         const client = new TwitterApi({
-        // @ts-ignore
-        appKey: process.env.TWITTER_API_KEY,
-        appSecret: process.env.TWITTER_API_SECRET_KEY,
-        accessToken: process.env.TWITTER_ACCESS_TOKEN,
-        accessSecret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
+            // @ts-ignore
+            appKey: process.env.TWITTER_API_KEY,
+            appSecret: process.env.TWITTER_API_SECRET_KEY,
+            accessToken: process.env.TWITTER_ACCESS_TOKEN,
+            accessSecret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
         });
         
         // @ts-ignore
@@ -19,10 +19,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         const { title, path } = req.body;
 
         try {
-        await client.v2.tweet(title + "\n\n" + `${CMS_URL}/posts/${path}`);
-        res.status(200).json({ message: 'Tweet posted successfully!' });
-        } catch (error) {
-        res.status(500).json({ error: 'Failed to post tweet', details: error.message });
+            await client.v2.tweet(title + "\n\n" + `${CMS_URL}/posts/${path}`);
+            res.status(200).json({ message: 'Tweet posted successfully!' });
+            } catch (error) {
+            res.status(500).json({ error: 'Failed to post tweet', details: error.message });
         }
     } else {
         res.status(405).json({ error: 'Method not allowed' });

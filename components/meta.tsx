@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { CMS_NAME, CMS_URL, HOME_OG_IMAGE_URL } from "../lib/constants";
+import Script from "next/script";
 
 export default function Meta({ ...rest }) {
   // props may not be passed
@@ -46,11 +47,17 @@ export default function Meta({ ...rest }) {
       <meta property="og:image" content={HOME_OG_IMAGE_URL} /> */}
       {/* Google Adsense */}
       <meta name="google-adsense-account" content="ca-pub-6858930580553924" />
-      <script
+      {/* <script
         async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6858930580553924"
         crossOrigin="anonymous"
-      ></script>
+      ></script> */}
+
+      <Script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6858930580553924"
+        crossOrigin="anonymous"
+      />
 
       {/* opengraph tags */}
 
