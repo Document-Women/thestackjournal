@@ -41,3 +41,4 @@ graphql
 *.next/
 .local
 Archive.zip
+wp_functions.php
