@@ -55,7 +55,7 @@ export default function Meta({ ...rest }) {
       />
 
       {/* Google tag (gtag.js) */}
-      <Script
+      {/* <Script
         async
         src="https://www.googletagmanager.com/gtag/js?id=G-L29WF2DSEV"
       />
@@ -69,7 +69,7 @@ export default function Meta({ ...rest }) {
           gtag('config', 'G-L29WF2DSEV');
         `,
         }}
-      />
+      /> */}
 
       {/* opengraph tags */}
 
