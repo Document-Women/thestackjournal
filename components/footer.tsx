@@ -162,7 +162,7 @@ export default function Footer() {
               <input
                 type="email"
                 name="email"
-                placeholder="Eamil Addres"
+                placeholder="Email Addres"
                 className="w-full my-1 p-4 bg-transparent border-b border-gray-800"
               />
 
