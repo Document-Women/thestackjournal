@@ -45,31 +45,9 @@ export default function Meta({ ...rest }) {
       <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       {/* <meta name="description" content={`${CMS_NAME}.`} />
       <meta property="og:image" content={HOME_OG_IMAGE_URL} /> */}
+
       {/* Google Adsense */}
-      <meta name="google-adsense-account" content="ca-pub-6858930580553924" />
-
-      <Script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6858930580553924"
-        crossOrigin="anonymous"
-      />
-
-      {/* Google tag (gtag.js) */}
-      {/* <Script
-        async
-        src="https://www.googletagmanager.com/gtag/js?id=G-L29WF2DSEV"
-      />
-
-      <Script
-        dangerouslySetInnerHTML={{
-          __html: `
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-L29WF2DSEV');
-        `,
-        }}
-      /> */}
+      <meta name="google-adsense-account" content="ca-pub-7693964294803532" />
 
       {/* opengraph tags */}
 
